@@ -294,7 +294,7 @@ const CM_CSS = `
 @media (prefers-reduced-motion: no-preference) { .tile { transition: transform .15s; } }
 .proj { display: grid; grid-template-columns: 1fr 1.2fr; gap: 40px; padding-block: 36px; border-top: 1px solid var(--line); align-items: center; }
 .proj > * { min-width: 0; }
-@media (max-width: 860px) { .proj { grid-template-columns: 1fr; } .cm-hero::before { width: 320px; height: 320px; border-width: 40px; right: -110px; top: -90px; } }
+@media (max-width: 860px) { .proj { grid-template-columns: 1fr; } .cm-hero::before { width: 220px; height: 220px; border-width: 28px; right: -130px; top: -70px; } }
 `;
 const TEAM = [['Management', 'Stratégie, carrière, contrats'], ['Booking', 'Concerts et tournées'], ['Communication', 'Réseaux sociaux et presse'], ['Production', 'Studio, clips, scène']];
 const TEAM_HTML = `<div class="grid g4">${TEAM.map(([r, d]) => `<div class="mate"><div class="ph light"><span class="cap">Photo</span></div><b>${r}</b><span>Nom du membre · ${d}</span></div>`).join('')}</div>`;
