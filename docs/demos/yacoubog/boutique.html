@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>Boutique · yacoubog.com (démo)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Barlow:wght@400;500;600;700&family=Barlow+Condensed:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../assets/demo.css">
+<style>
+.yb-hero { display: grid; grid-template-columns: 1.2fr 1fr; gap: 48px; align-items: center; padding-block: 56px 72px; }
+.yb-hero > * { min-width: 0; }
+.yb-hero .h-xl { margin: 10px 0 22px; }
+.rel { display: grid; gap: 10px; text-decoration: none; }
+.rel b { font-family: var(--cond); font-size: 22px; text-transform: uppercase; }
+.rel span { color: var(--grey); font-size: 15px; }
+.clip { position: relative; aspect-ratio: 16 / 9; border-radius: 14px; overflow: hidden; display: grid; place-items: center; text-decoration: none; color: var(--white); background: repeating-linear-gradient(-35deg, #2A2627 0 14px, #1A1718 14px 28px); }
+.clip i { width: 84px; height: 84px; border-radius: 50%; background: var(--red); display: grid; place-items: center; }
+.clip i::before { content: ""; border-left: 26px solid var(--white); border-top: 16px solid transparent; border-bottom: 16px solid transparent; margin-left: 6px; }
+.clip span { position: absolute; left: 18px; bottom: 14px; font-family: var(--cond); text-transform: uppercase; letter-spacing: .08em; }
+.disco { display: grid; grid-template-columns: 340px 1fr; gap: 40px; padding-block: 36px; border-top: 1px solid #2A2627; }
+.disco > * { min-width: 0; }
+.tracks { list-style: none; margin: 16px 0 0; padding: 0; counter-reset: t; }
+.tracks li { counter-increment: t; display: flex; gap: 14px; padding-block: 10px; border-top: 1px solid #2A2627; color: #D5CFD0; }
+.tracks li::before { content: counter(t, decimal-leading-zero); font-family: var(--mono); font-size: 13px; color: var(--grey); padding-top: 3px; }
+.cart { display: inline-flex; gap: 6px; align-items: center; font-family: var(--cond); font-weight: 700; text-transform: uppercase; }
+.cart b { background: var(--red); color: var(--white); border-radius: 999px; min-width: 26px; text-align: center; padding: 0 8px; }
+@media (max-width: 860px) { .yb-hero, .disco { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body class="site-yacoubog">
+<div class="demo-bar"><div class="in"><span>Maquette de démonstration pour yacoubog.com · proposée par Hamady Diallo</span><a href="../../proposition/index.html">← Retour à la proposition</a></div></div>
+<header class="hd"><div class="in">
+  <a class="logo" href="index.html">YACOU B OG</a>
+  <nav class="nav" id="nav" aria-label="Menu principal"><a href="index.html">Accueil</a><a href="musique.html">Musique</a><a href="concerts.html">Concerts</a><a href="boutique.html" aria-current="page">Boutique</a><a href="bio.html">Bio</a><a href="booking.html">Booking</a></nav>
+  <div class="row"><a class="btn sm hd-cta" href="../enroutedu26mars/billets.html">Billets</a><button class="burger" type="button" aria-expanded="false" aria-controls="nav">Menu</button></div>
+</div></header>
+<main>
+
+<section class="sec"><div class="in">
+  <div class="sec-head">
+    <div><div class="kicker">Boutique</div><h1 class="h-xl" style="margin-top:10px">Merch</h1></div>
+    <div class="row"><span class="cart">Panier <b id="cart-n">0</b></span><button class="btn sm" id="checkout" type="button">Commander</button></div>
+  </div>
+  <p class="note" style="margin-bottom:24px">Produits et prix d'exemple. Paiement par Orange Money, Moov Money ou à la livraison à Bamako.</p>
+  <div class="grid g4">
+    <div class="card"><div class="ph sq red"><span class="cap">Photo produit</span></div><h3>T-shirt Civilisation Malienne</h3><span class="price">Prix à fixer</span><button class="btn sm" type="button" data-add="T-shirt Civilisation Malienne">Ajouter au panier</button></div><div class="card"><div class="ph sq "><span class="cap">Photo produit</span></div><h3>Casquette Yacou B OG</h3><span class="price">Prix à fixer</span><button class="btn sm" type="button" data-add="Casquette Yacou B OG">Ajouter au panier</button></div><div class="card"><div class="ph sq red"><span class="cap">Photo produit</span></div><h3>Hoodie Baye Fall</h3><span class="price">Prix à fixer</span><button class="btn sm" type="button" data-add="Hoodie Baye Fall">Ajouter au panier</button></div><div class="card"><div class="ph sq "><span class="cap">Photo produit</span></div><h3>T-shirt En route du 26 Mars</h3><span class="price">Prix à fixer</span><button class="btn sm" type="button" data-add="T-shirt En route du 26 Mars">Ajouter au panier</button></div>
+  </div>
+</div></section>
+
+</main>
+<footer class="ft"><div class="in">
+  <div><span class="logo">YACOU B OG</span><p>Rappeur malien. Kati, Bamako.</p><p class="note" style="margin-top:12px">Maquette : textes et visuels provisoires, à remplacer par les contenus de l'équipe.</p></div>
+  <div><b>Suivre</b>
+  <a href="https://www.youtube.com/@yacoubog" target="_blank" rel="noopener">YouTube</a>
+  <a href="https://www.instagram.com/yacou_b_og_off/" target="_blank" rel="noopener">Instagram</a>
+  <a href="https://www.facebook.com/yacoubogoff" target="_blank" rel="noopener">Facebook</a>
+  <a href="https://x.com/yacoubogoff" target="_blank" rel="noopener">X</a></div>
+  <div><b>Les autres sites</b><a href="../civilisationmalienne/index.html">civilisationmalienne.com</a><a href="../enroutedu26mars/index.html">enroutedu26mars.com</a></div>
+</div></footer>
+<script src="../assets/demo.js"></script>
+</body>
+</html>

@@ -1,0 +1,394 @@
+<title>Hamady Diallo Portfolio</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one left-aligned reading column (max 1080px), projects as full-width case rows, indigo ink with a single saffron highlight */
+:root {
+  --bg: #F5F6FA;
+  --surface: #FFFFFF;
+  --fg: #151935;
+  --muted: #565C7E;
+  --line: #D9DCEA;
+  --ink: #26338A;
+  --ink-soft: #E6E9F7;
+  --saffron: #C98A06;
+  --saffron-soft: #FBF0D6;
+  --display: "Archivo", "Arial Narrow", system-ui, sans-serif;
+  --body: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0D1022; --surface: #151935; --fg: #E8EAF6; --muted: #A0A6C6; --line: #272C50;
+    --ink: #9AA6FF; --ink-soft: #1D2350; --saffron: #F0B73A; --saffron-soft: #2C2516; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0D1022; --surface: #151935; --fg: #E8EAF6; --muted: #A0A6C6; --line: #272C50;
+  --ink: #9AA6FF; --ink-soft: #1D2350; --saffron: #F0B73A; --saffron-soft: #2C2516; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body {
+  background: var(--bg); color: var(--fg);
+  font-family: var(--body); font-size: 16px; line-height: 1.6;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+.wrap { max-width: 1080px; margin: 0 auto; }
+a { color: var(--ink); text-underline-offset: 3px; }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--saffron); outline-offset: 3px; border-radius: 4px; }
+h1, h2, h3 { font-family: var(--display); text-wrap: balance; margin: 0; }
+.eyebrow { font-family: var(--mono); font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+
+/* Header */
+.top { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding-block: 22px; border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+.top .id { font-family: var(--mono); font-size: 13px; }
+.top nav { display: flex; gap: 18px; flex-wrap: wrap; font-size: 14px; }
+.top nav a { color: var(--fg); text-decoration: none; }
+.top nav a:hover { color: var(--ink); text-decoration: underline; }
+
+/* Hero */
+.hero { padding-block: 64px 48px; display: grid; gap: 28px; }
+.hero h1 {
+  font-size: clamp(44px, 9vw, 104px); line-height: .92; font-weight: 850;
+  font-stretch: 125%; letter-spacing: -.02em; text-transform: uppercase;
+}
+.hero h1 span { color: var(--ink); display: block; }
+.hero .lede { font-size: clamp(18px, 2.2vw, 22px); max-width: 40ch; margin: 0; }
+.hero .lede mark { background: var(--saffron-soft); color: inherit; padding: 0 .2em; border-radius: 3px; }
+.facts { display: flex; flex-wrap: wrap; gap: 10px 28px; font-family: var(--mono); font-size: 13px; color: var(--muted); }
+.facts b { color: var(--fg); font-weight: 500; }
+.cta-row { display: flex; gap: 12px; flex-wrap: wrap; }
+.btn { display: inline-flex; align-items: center; gap: 8px; padding: 12px 20px; border-radius: 999px; font-weight: 600; font-size: 15px; text-decoration: none; border: 1.5px solid var(--ink); cursor: pointer; font-family: var(--body); }
+.btn.primary { background: var(--ink); color: var(--bg); }
+.btn.ghost { background: transparent; color: var(--ink); }
+
+section { padding-block: 56px; border-top: 1px solid var(--line); }
+.sec-head { display: grid; gap: 8px; margin-bottom: 32px; }
+.sec-head h2 { font-size: clamp(28px, 4.5vw, 44px); font-stretch: 110%; font-weight: 800; line-height: 1.05; }
+.sec-head p { margin: 0; color: var(--muted); max-width: 60ch; }
+
+/* Featured project */
+.feature { display: grid; grid-template-columns: 1.1fr .9fr; gap: 32px; background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: clamp(20px, 4vw, 40px); }
+.feature > * { min-width: 0; }
+.feature h3 { font-size: clamp(30px, 5vw, 52px); font-stretch: 125%; font-weight: 900; text-transform: uppercase; line-height: 1; }
+.feature .what { margin: 14px 0 0; }
+.feature ul { margin: 16px 0 0; padding-left: 18px; display: grid; gap: 6px; }
+.status { display: inline-block; font-family: var(--mono); font-size: 12px; padding: 3px 10px; border-radius: 999px; background: var(--saffron-soft); color: var(--saffron); border: 1px solid currentColor; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 18px; }
+.chip { font-family: var(--mono); font-size: 12px; padding: 3px 9px; border: 1px solid var(--line); border-radius: 6px; color: var(--muted); background: var(--bg); }
+
+/* Mini player illustrating HLS quality switch */
+.player { align-self: center; background: var(--ink-soft); border-radius: 14px; padding: 18px; display: grid; gap: 14px; }
+.player .now { display: flex; gap: 14px; align-items: center; }
+.cover { width: 64px; height: 64px; border-radius: 10px; flex: none; background:
+  repeating-linear-gradient(45deg, var(--ink) 0 6px, transparent 6px 12px), var(--saffron); }
+.player .t { font-weight: 600; }
+.player .a { color: var(--muted); font-size: 14px; }
+.bar { height: 6px; background: var(--line); border-radius: 3px; overflow: hidden; }
+.bar i { display: block; height: 100%; width: 38%; background: var(--ink); }
+.times { display: flex; justify-content: space-between; font-family: var(--mono); font-size: 12px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.quality { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.quality button { font-family: var(--mono); font-size: 13px; padding: 10px; border-radius: 10px; border: 1.5px solid var(--line); background: var(--surface); color: var(--fg); cursor: pointer; text-align: left; }
+.quality button small { display: block; color: var(--muted); font-size: 11px; }
+.quality button[aria-pressed="true"] { border-color: var(--ink); box-shadow: inset 0 0 0 1px var(--ink); }
+.player .note { font-size: 13px; color: var(--muted); margin: 0; }
+.live { display: flex; align-items: center; gap: 8px; font-family: var(--mono); font-size: 12px; }
+.live::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: #D7263D; animation: pulse 1.6s ease-in-out infinite; }
+@keyframes pulse { 50% { opacity: .3; } }
+@media (prefers-reduced-motion: reduce) { .live::before { animation: none; } }
+
+/* Case rows */
+.cases { display: grid; margin-top: 40px; }
+.case { display: grid; grid-template-columns: 120px 1fr 1fr; gap: 24px; padding-block: 28px; border-top: 1px solid var(--line); }
+.case > * { min-width: 0; }
+.case:last-child { border-bottom: 1px solid var(--line); }
+.case .yr { font-family: var(--mono); font-size: 13px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.case h3 { font-size: 22px; font-stretch: 105%; font-weight: 750; line-height: 1.2; }
+.case .client { color: var(--muted); font-size: 14px; margin-top: 4px; }
+.case .client a { font-family: var(--mono); font-size: 13px; }
+.case p { margin: 0; }
+.case ul { margin: 0; padding-left: 18px; display: grid; gap: 4px; }
+
+/* Services */
+.services { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 14px; overflow: hidden; }
+.svc { background: var(--surface); padding: 26px; display: grid; gap: 10px; align-content: start; }
+.svc h3 { font-size: 20px; font-stretch: 110%; font-weight: 750; }
+.svc p { margin: 0; color: var(--muted); font-size: 15px; }
+
+/* Method: real sequence */
+.steps { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(5, 1fr); gap: 20px; counter-reset: s; }
+.steps li { counter-increment: s; display: grid; gap: 6px; align-content: start; padding-top: 14px; border-top: 3px solid var(--ink); }
+.steps li::before { content: "Étape " counter(s); font-family: var(--mono); font-size: 12px; color: var(--muted); }
+.steps b { font-family: var(--display); font-size: 18px; font-stretch: 105%; }
+.steps span { font-size: 14px; color: var(--muted); }
+
+/* Skills + education */
+.two { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+.two > * { min-width: 0; }
+dl.skills { margin: 0; display: grid; gap: 16px; }
+dl.skills dt { font-family: var(--mono); font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: var(--ink); }
+dl.skills dd { margin: 4px 0 0; }
+.edu { list-style: none; padding: 0; margin: 0; display: grid; gap: 14px; }
+.edu li { display: grid; grid-template-columns: 96px 1fr; gap: 12px; }
+.edu .yr { font-family: var(--mono); font-size: 13px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.edu small { display: block; color: var(--muted); }
+
+/* Contact */
+.contact { background: var(--ink); color: var(--bg); border-radius: 18px; padding: clamp(24px, 5vw, 48px); display: grid; gap: 22px; }
+.contact h2 { font-size: clamp(30px, 5vw, 52px); font-stretch: 120%; font-weight: 850; text-transform: uppercase; line-height: 1; }
+.contact p { margin: 0; max-width: 52ch; }
+.contact .lines { display: grid; gap: 10px; }
+.contact .line { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px; font-family: var(--mono); font-size: 15px; }
+.contact .line span:first-child { width: 90px; opacity: .7; font-size: 12px; text-transform: uppercase; letter-spacing: .1em; }
+.contact a { color: var(--bg); }
+.copy { font-family: var(--mono); font-size: 12px; padding: 4px 10px; border-radius: 999px; border: 1px solid currentColor; background: transparent; color: var(--bg); cursor: pointer; }
+footer { padding-block: 28px 40px; font-family: var(--mono); font-size: 12px; color: var(--muted); }
+
+@media (max-width: 860px) {
+  .feature, .two { grid-template-columns: 1fr; }
+  .case { grid-template-columns: 1fr; gap: 10px; }
+  .services { grid-template-columns: 1fr; }
+  .steps { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 480px) {
+  .steps { grid-template-columns: 1fr; }
+  .edu li { grid-template-columns: 1fr; gap: 2px; }
+  .contact .line span:first-child { width: 100%; }
+}
+</style>
+
+<div class="wrap">
+  <header class="top">
+    <div class="id">hamady.diallo · Bamako, Mali</div>
+    <nav aria-label="Sections">
+      <a href="#projets">Projets</a>
+      <a href="#services">Services</a>
+      <a href="#methode">Méthode</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <div class="hero">
+    <div class="eyebrow">Développeur web &amp; infrastructure</div>
+    <h1>Hamady<span>Ibrahim Diallo</span></h1>
+    <p class="lede">Je conçois, développe et héberge des plateformes web pour des structures maliennes. Du site vitrine à la <mark>plateforme de streaming musical</mark>, je m'occupe du code, des serveurs et de la mise en ligne.</p>
+    <div class="facts">
+      <div><b>Basé à</b> Bamako</div>
+      <div><b>Langues</b> français, anglais</div>
+      <div><b>Formation</b> Génie logiciel, Master Data Science</div>
+      <div><b>Statut</b> disponible pour missions</div>
+    </div>
+    <div class="cta-row">
+      <a class="btn primary" href="#projets">Voir les projets</a>
+      <a class="btn ghost" href="#contact">Me contacter</a>
+    </div>
+  </div>
+
+  <section id="projets">
+    <div class="sec-head">
+      <div class="eyebrow">Projets sélectionnés</div>
+      <h2>Ce que j'ai construit</h2>
+      <p>Chaque projet a été mené de bout en bout : besoin du client, développement, déploiement sur serveur et suivi après la mise en ligne.</p>
+    </div>
+
+    <article class="feature" aria-labelledby="balani">
+      <div>
+        <span class="status">En développement · 2026</span>
+        <h3 id="balani" style="margin-top:14px">Balani</h3>
+        <p class="what">Plateforme de streaming musical pour le Mali et l'Afrique de l'Ouest. Les artistes publient leurs sons et albums, les DJ mixent en direct, et les auditeurs choisissent une qualité adaptée à leur forfait internet.</p>
+        <ul>
+          <li>Espace Studio pour les artistes : pochette, titres, suivi des écoutes.</li>
+          <li>Conversion audio automatique en deux qualités : Éco pour économiser les données mobiles, HD pour le wifi.</li>
+          <li>Live DJ depuis VirtualDJ, Mixxx ou Traktor, avec chat en temps réel et replays enregistrés.</li>
+          <li>Connexion par numéro de téléphone et code SMS, sans mot de passe.</li>
+          <li>Installable sur le téléphone comme une application (PWA).</li>
+        </ul>
+        <div class="chips">
+          <span class="chip">Next.js 16</span><span class="chip">TypeScript</span><span class="chip">PostgreSQL</span><span class="chip">FFmpeg · HLS</span><span class="chip">Icecast</span><span class="chip">Tailwind CSS</span>
+        </div>
+      </div>
+      <div class="player" aria-label="Aperçu du lecteur Balani">
+        <div class="live">Live · DJ set en cours</div>
+        <div class="now">
+          <div class="cover" aria-hidden="true"></div>
+          <div><div class="t">Titre de démonstration</div><div class="a">Artiste · Single</div></div>
+        </div>
+        <div class="bar"><i></i></div>
+        <div class="times"><span>1:14</span><span>3:12</span></div>
+        <div class="quality" role="group" aria-label="Qualité d'écoute">
+          <button type="button" id="q-eco" aria-pressed="true">Éco<small>AAC 64 kbit/s</small></button>
+          <button type="button" id="q-hd" aria-pressed="false">HD<small>AAC 160 kbit/s</small></button>
+        </div>
+        <p class="note" id="q-note">Environ 1,5 Mo pour un titre de 3 min. Réglage par défaut sur réseau mobile.</p>
+      </div>
+    </article>
+
+    <div class="cases">
+      <article class="case">
+        <div class="yr">2025 – 2026</div>
+        <div>
+          <h3>Digitalisation des services DRCTU et DRMD</h3>
+          <div class="client">Mairie du District de Bamako · avec HDS SARL · développeur principal</div>
+        </div>
+        <div>
+          <ul>
+            <li>Application web d'émission, de suivi et de reporting des tickets.</li>
+            <li>Application mobile pour la saisie des données sur le terrain.</li>
+            <li>Installation des serveurs HPE ProLiant DL380, déploiement et sécurisation de la base de données.</li>
+          </ul>
+          <div class="chips"><span class="chip">Laravel</span><span class="chip">MySQL</span><span class="chip">Cordova</span><span class="chip">Linux · Nginx</span></div>
+        </div>
+      </article>
+
+      <article class="case">
+        <div class="yr">Mars 2026</div>
+        <div>
+          <h3>Site web Sensexpress</h3>
+          <div class="client">Agence de marketing olfactif · freelance · <a href="https://sensexpress.com" target="_blank" rel="noopener">sensexpress.com</a></div>
+        </div>
+        <div>
+          <p>Conception et développement du site sous WordPress. Référencement naturel complet : structure du contenu, optimisation des pages, suivi du positionnement.</p>
+          <div class="chips"><span class="chip">WordPress</span><span class="chip">SEO</span><span class="chip">Responsive</span></div>
+        </div>
+      </article>
+
+      <article class="case">
+        <div class="yr">2026</div>
+        <div>
+          <h3>Modernisation de l'infrastructure serveur</h3>
+          <div class="client">CREE, Commission de Régulation de l'Électricité et de l'Eau · consultant technique</div>
+        </div>
+        <div>
+          <p>Installation des serveurs en baie, recommandations techniques, migration vers une architecture virtualisée Proxmox VE et sécurisation des accès réseau.</p>
+          <div class="chips"><span class="chip">Proxmox VE</span><span class="chip">RAID</span><span class="chip">Zabbix</span><span class="chip">Wazuh</span></div>
+        </div>
+      </article>
+
+      <article class="case">
+        <div class="yr">2023 – 2024</div>
+        <div>
+          <h3>Site web et parc informatique</h3>
+          <div class="client">AMCP-SP, Alliance Médicale Contre le Paludisme · développeur web et informatique</div>
+        </div>
+        <div>
+          <p>Création et gestion du site de l'organisation : publication des activités et services, mises à jour régulières. Gestion complète du parc informatique et support aux utilisateurs.</p>
+          <div class="chips"><span class="chip">WordPress</span><span class="chip">Jira</span><span class="chip">Support</span></div>
+        </div>
+      </article>
+
+      <article class="case">
+        <div class="yr">2026</div>
+        <div>
+          <h3>Gestion des factures d'eau</h3>
+          <div class="client">Application de bureau Windows</div>
+        </div>
+        <div>
+          <p>Gestion des clients, saisie des index de compteur, calcul automatique de la consommation et génération des factures en PDF.</p>
+          <div class="chips"><span class="chip">Python</span><span class="chip">SQLite</span><span class="chip">PDF</span></div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section id="services">
+    <div class="sec-head">
+      <div class="eyebrow">Services</div>
+      <h2>Ce que je peux faire pour vous</h2>
+    </div>
+    <div class="services">
+      <div class="svc">
+        <h3>Sites d'artistes et de marques</h3>
+        <p>Site vitrine rapide sur mobile, musique et clips intégrés, agenda des concerts, contenu que votre équipe met à jour sans développeur.</p>
+      </div>
+      <div class="svc">
+        <h3>Événements et billetterie</h3>
+        <p>Page événement avec compte à rebours, vente de billets par mobile money, billets à QR code et contrôle à l'entrée.</p>
+      </div>
+      <div class="svc">
+        <h3>Hébergement et maintenance</h3>
+        <p>Serveur, nom de domaine, HTTPS, sauvegardes et surveillance. Le site tient la charge le jour où tout le monde le visite en même temps.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="methode">
+    <div class="sec-head">
+      <div class="eyebrow">Méthode</div>
+      <h2>Comment se passe un projet</h2>
+    </div>
+    <ol class="steps">
+      <li><b>Cadrage</b><span>Rencontre, objectifs, contenus disponibles, calendrier.</span></li>
+      <li><b>Maquettes</b><span>Pages clés sur mobile et ordinateur, validées avec vous.</span></li>
+      <li><b>Développement</b><span>Version de test en ligne pour suivre l'avancement.</span></li>
+      <li><b>Mise en ligne</b><span>Déploiement, référencement, formation de votre équipe.</span></li>
+      <li><b>Suivi</b><span>Maintenance, mises à jour et statistiques de visite.</span></li>
+    </ol>
+  </section>
+
+  <section>
+    <div class="two">
+      <div>
+        <div class="sec-head"><div class="eyebrow">Compétences</div><h2>Outils</h2></div>
+        <dl class="skills">
+          <div><dt>Web</dt><dd>WordPress, PHP / Laravel, JavaScript, Next.js, React, API REST, SEO</dd></div>
+          <div><dt>Données</dt><dd>MySQL, PostgreSQL, MongoDB, SQLite</dd></div>
+          <div><dt>Serveurs</dt><dd>Linux Debian et Ubuntu, Windows Server, Nginx, Proxmox VE, SSL, UFW</dd></div>
+          <div><dt>Surveillance</dt><dd>Zabbix, Wazuh</dd></div>
+        </dl>
+      </div>
+      <div>
+        <div class="sec-head"><div class="eyebrow">Parcours</div><h2>Formation</h2></div>
+        <ul class="edu">
+          <li><span class="yr">2025 – 2026</span><span>Master Science des Données<small>U.I.E Mali · 2e année en cours</small></span></li>
+          <li><span class="yr">2018 – 2022</span><span>Génie Logiciel<small>N.I.I.T Dakar</small></span></li>
+          <li><span class="yr">Sept. 2025</span><span>Logistique de projet humanitaire<small>Bioforce</small></span></li>
+          <li><span class="yr">Depuis 2026</span><span>Stage Contrôle permanent<small>Ecobank Mali</small></span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" style="border-top:0">
+    <div class="contact">
+      <div class="eyebrow" style="color:inherit;opacity:.75">Contact</div>
+      <h2>Parlons de votre projet</h2>
+      <p>Je réponds sous 24 heures. Un premier échange de 30 minutes suffit pour cadrer le besoin et proposer un calendrier.</p>
+      <div class="lines">
+        <div class="line"><span>E-mail</span><span id="mail">hadiallo.diallo@gmail.com</span><button class="copy" type="button" data-copy="mail">Copier</button></div>
+        <div class="line"><span>Téléphone</span><span id="tel">+223 71 68 61 86</span><button class="copy" type="button" data-copy="tel">Copier</button></div>
+        <div class="line"><span>LinkedIn</span><a href="https://linkedin.com/in/hamibradiallo223" target="_blank" rel="noopener">linkedin.com/in/hamibradiallo223</a></div>
+        <div class="line"><span>GitHub</span><a href="https://github.com/hamML3" target="_blank" rel="noopener">github.com/hamML3</a></div>
+      </div>
+    </div>
+  </section>
+
+  <footer>Hamady Ibrahim Diallo · Niamana, Bamako · 2026</footer>
+</div>
+
+<script>
+(function () {
+  var eco = document.getElementById('q-eco'), hd = document.getElementById('q-hd'), note = document.getElementById('q-note');
+  function set(isHd) {
+    eco.setAttribute('aria-pressed', String(!isHd));
+    hd.setAttribute('aria-pressed', String(isHd));
+    note.textContent = isHd
+      ? 'Environ 3,6 Mo pour un titre de 3 min. Recommandé en wifi.'
+      : 'Environ 1,5 Mo pour un titre de 3 min. Réglage par défaut sur réseau mobile.';
+  }
+  eco.addEventListener('click', function () { set(false); });
+  hd.addEventListener('click', function () { set(true); });
+
+  document.querySelectorAll('.copy').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var el = document.getElementById(b.dataset.copy);
+      function selectIt() { var r = document.createRange(); r.selectNodeContents(el); var s = getSelection(); s.removeAllRanges(); s.addRange(r); }
+      try {
+        navigator.clipboard.writeText(el.textContent).then(function () { b.textContent = 'Copié'; setTimeout(function () { b.textContent = 'Copier'; }, 1600); }, selectIt);
+      } catch (e) { selectIt(); }
+    });
+  });
+})();
+</script>

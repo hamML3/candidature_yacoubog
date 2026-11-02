@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>Accueil · yacoubog.com (démo)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Barlow:wght@400;500;600;700&family=Barlow+Condensed:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../assets/demo.css">
+<style>
+.yb-hero { display: grid; grid-template-columns: 1.2fr 1fr; gap: 48px; align-items: center; padding-block: 56px 72px; }
+.yb-hero > * { min-width: 0; }
+.yb-hero .h-xl { margin: 10px 0 22px; }
+.rel { display: grid; gap: 10px; text-decoration: none; }
+.rel b { font-family: var(--cond); font-size: 22px; text-transform: uppercase; }
+.rel span { color: var(--grey); font-size: 15px; }
+.clip { position: relative; aspect-ratio: 16 / 9; border-radius: 14px; overflow: hidden; display: grid; place-items: center; text-decoration: none; color: var(--white); background: repeating-linear-gradient(-35deg, #2A2627 0 14px, #1A1718 14px 28px); }
+.clip i { width: 84px; height: 84px; border-radius: 50%; background: var(--red); display: grid; place-items: center; }
+.clip i::before { content: ""; border-left: 26px solid var(--white); border-top: 16px solid transparent; border-bottom: 16px solid transparent; margin-left: 6px; }
+.clip span { position: absolute; left: 18px; bottom: 14px; font-family: var(--cond); text-transform: uppercase; letter-spacing: .08em; }
+.disco { display: grid; grid-template-columns: 340px 1fr; gap: 40px; padding-block: 36px; border-top: 1px solid #2A2627; }
+.disco > * { min-width: 0; }
+.tracks { list-style: none; margin: 16px 0 0; padding: 0; counter-reset: t; }
+.tracks li { counter-increment: t; display: flex; gap: 14px; padding-block: 10px; border-top: 1px solid #2A2627; color: #D5CFD0; }
+.tracks li::before { content: counter(t, decimal-leading-zero); font-family: var(--mono); font-size: 13px; color: var(--grey); padding-top: 3px; }
+.cart { display: inline-flex; gap: 6px; align-items: center; font-family: var(--cond); font-weight: 700; text-transform: uppercase; }
+.cart b { background: var(--red); color: var(--white); border-radius: 999px; min-width: 26px; text-align: center; padding: 0 8px; }
+@media (max-width: 860px) { .yb-hero, .disco { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body class="site-yacoubog">
+<div class="demo-bar"><div class="in"><span>Maquette de démonstration pour yacoubog.com · proposée par Hamady Diallo</span><a href="../../proposition/index.html">← Retour à la proposition</a></div></div>
+<header class="hd"><div class="in">
+  <a class="logo" href="index.html">YACOU B OG</a>
+  <nav class="nav" id="nav" aria-label="Menu principal"><a href="index.html" aria-current="page">Accueil</a><a href="musique.html">Musique</a><a href="concerts.html">Concerts</a><a href="boutique.html">Boutique</a><a href="bio.html">Bio</a><a href="booking.html">Booking</a></nav>
+  <div class="row"><a class="btn sm hd-cta" href="../enroutedu26mars/billets.html">Billets</a><button class="burger" type="button" aria-expanded="false" aria-controls="nav">Menu</button></div>
+</div></header>
+<main>
+
+<section class="dark"><div class="in yb-hero">
+  <div>
+    <div class="kicker">Dernier projet · EP · 5 titres</div>
+    <h1 class="h-xl">Baye<br>Fall 1</h1>
+    <div class="row" style="margin-bottom:22px"><a class="btn" href="musique.html">Écouter l'EP</a><a class="btn line" href="#clip">Voir le dernier clip</a></div>
+    <div class="plats">
+  <a class="plat" href="#" data-soon="Lien Spotify officiel à fournir par l'équipe.">Spotify</a>
+  <a class="plat" href="#" data-soon="Lien Apple Music officiel à fournir par l'équipe.">Apple Music</a>
+  <a class="plat" href="#" data-soon="Lien Audiomack officiel à fournir par l'équipe.">Audiomack</a>
+  <a class="plat" href="https://www.youtube.com/@yacoubog" target="_blank" rel="noopener">YouTube</a>
+  <a class="plat" href="#" data-soon="Lien Boomplay officiel à fournir par l'équipe.">Boomplay</a>
+</div>
+  </div>
+  <div class="ph sq cover-art"><span class="big">Baye<br>Fall 1</span></div>
+</div></section>
+
+<section class="sec"><div class="in">
+  <div class="sec-head"><h2 class="h-l">Concerts</h2><a class="btn line sm" href="concerts.html">Toutes les dates</a></div>
+  <div class="gigs">
+  <div class="gig big"><span class="d">Date à annoncer</span><span><b>Bamako</b> <span class="v">· Stade du 26 Mars</span></span><a class="btn white sm" href="../enroutedu26mars/billets.html">Billets</a></div>
+  <div class="gig"><span class="d">Date à confirmer</span><span><b>Kita</b> <span class="v">· Mali</span></span><a class="btn line sm" href="#" data-soon="Page du concert à créer avec les infos de l'organisateur.">Infos</a></div>
+  <div class="gig"><span class="d">Date à confirmer</span><span><b>Kéniéba</b> <span class="v">· Mali</span></span><a class="btn line sm" href="#" data-soon="Page du concert à créer avec les infos de l'organisateur.">Infos</a></div>
+  <div class="gig"><span class="d">Date à confirmer</span><span><b>Kangaba</b> <span class="v">· Mali</span></span><a class="btn line sm" href="#" data-soon="Page du concert à créer avec les infos de l'organisateur.">Infos</a></div>
+  <div class="gig"><span class="d">Date à confirmer</span><span><b>Bruxelles</b> <span class="v">· Belgique</span></span><a class="btn line sm" href="#" data-soon="Page du concert à créer avec les infos de l'organisateur.">Infos</a></div>
+</div>
+</div></section>
+
+<section class="sec dark" id="clip"><div class="in grid g2" style="align-items:center;gap:40px">
+  <a class="clip" href="https://www.youtube.com/@yacoubog" target="_blank" rel="noopener" aria-label="Voir les clips sur YouTube"><i></i><span>Dernier clip · YouTube</span></a>
+  <div style="display:grid;gap:16px">
+    <div class="kicker">Dernier clip</div>
+    <h2 class="h-l">Titre du clip</h2>
+    <p class="lead">Le dernier clip s'affiche ici automatiquement à chaque nouvelle sortie sur la chaîne YouTube.</p>
+    <div><a class="btn" href="https://www.youtube.com/@yacoubog" target="_blank" rel="noopener">S'abonner à la chaîne</a></div>
+  </div>
+</div></section>
+
+<section class="sec"><div class="in">
+  <div class="sec-head"><h2 class="h-l">Discographie</h2><a class="btn line sm" href="musique.html">Tout écouter</a></div>
+  <div class="grid g4">
+    <a class="rel" href="musique.html"><div class="ph sq cover-art"></div><b>Baye Fall 1</b><span>EP · 2023 · 5 titres</span></a><a class="rel" href="musique.html"><div class="ph sq red"></div><b>Venom III</b><span>Projet</span></a><a class="rel" href="musique.html"><div class="ph sq "></div><b>Venom II</b><span>Projet</span></a><a class="rel" href="musique.html"><div class="ph sq red"></div><b>Venom I</b><span>Projet</span></a>
+  </div>
+</div></section>
+
+<section class="sec paper"><div class="in grid g2" style="align-items:center;gap:40px">
+  <div class="ph light"><span class="cap">Photo officielle de l'artiste</span></div>
+  <div style="display:grid;gap:16px">
+    <div class="kicker">Biographie</div>
+    <h2 class="h-l">De Kati au Stade du 26 Mars</h2>
+    <p class="lead">Yacouba Diakité, alias Yacou B OG, est un rappeur malien né en 1998, originaire de Kati et de Bamako. De la mixtape Koungo Fitini en 2020 à l'EP Baye Fall 1, il trace sa route jusqu'au plus grand stade du pays.</p>
+    <div><a class="btn black" href="bio.html">Lire la biographie</a></div>
+  </div>
+</div></section>
+
+<section class="sec redbg"><div class="in grid g2" style="align-items:center;gap:32px">
+  <div style="display:grid;gap:10px"><div class="kicker">Newsletter</div><h2 class="h-l">Ne rate aucune date</h2><p>Sorties, concerts et billetterie en avant-première.</p></div>
+  <form class="f" data-demo="Merci ! Démo : l'inscription serait enregistrée dans la liste de fans.">
+    <div class="field"><label for="nl-mail">E-mail ou numéro WhatsApp</label><input id="nl-mail" required placeholder="vous@exemple.com ou 70 00 00 00"></div>
+    <div><button class="btn black" type="submit">Je m'inscris</button></div>
+  </form>
+</div></section>
+
+</main>
+<footer class="ft"><div class="in">
+  <div><span class="logo">YACOU B OG</span><p>Rappeur malien. Kati, Bamako.</p><p class="note" style="margin-top:12px">Maquette : textes et visuels provisoires, à remplacer par les contenus de l'équipe.</p></div>
+  <div><b>Suivre</b>
+  <a href="https://www.youtube.com/@yacoubog" target="_blank" rel="noopener">YouTube</a>
+  <a href="https://www.instagram.com/yacou_b_og_off/" target="_blank" rel="noopener">Instagram</a>
+  <a href="https://www.facebook.com/yacoubogoff" target="_blank" rel="noopener">Facebook</a>
+  <a href="https://x.com/yacoubogoff" target="_blank" rel="noopener">X</a></div>
+  <div><b>Les autres sites</b><a href="../civilisationmalienne/index.html">civilisationmalienne.com</a><a href="../enroutedu26mars/index.html">enroutedu26mars.com</a></div>
+</div></footer>
+<script src="../assets/demo.js"></script>
+</body>
+</html>

@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>Accueil · enroutedu26mars.com (démo)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Barlow:wght@400;500;600;700&family=Barlow+Condensed:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../assets/demo.css">
+<style>
+.hd { background: var(--red); }
+.nav a { color: rgba(255,255,255,.75); }
+.nav a[aria-current="page"] { box-shadow: 0 2px 0 var(--white); }
+.hd .btn { background: var(--black); border-color: var(--black); }
+@media (max-width: 860px) { .nav { background: var(--red); } .nav a { border-top-color: rgba(255,255,255,.2); } }
+.e-hero { position: relative; overflow: hidden; padding-block: 56px 72px; }
+.e-hero::before { content: "26"; position: absolute; right: -30px; top: -120px; font-family: var(--display); font-size: clamp(320px, 52vw, 720px); line-height: 1; color: rgba(0,0,0,.12); pointer-events: none; }
+.e-hero .in { position: relative; display: grid; gap: 22px; }
+.count { display: flex; gap: 10px; flex-wrap: wrap; }
+.count div { background: var(--black); border-radius: 12px; padding: 12px 16px; min-width: 92px; text-align: center; }
+.count b { display: block; font-family: var(--display); font-weight: 400; font-size: clamp(36px, 5vw, 56px); line-height: 1; font-variant-numeric: tabular-nums; }
+.count small { font-family: var(--cond); text-transform: uppercase; letter-spacing: .12em; color: var(--grey); }
+.tier { border-radius: 14px; padding: 24px; display: grid; gap: 10px; background: var(--white); color: var(--black); border: 1px solid var(--line); }
+.tier.vip { background: var(--black); color: var(--white); border-color: var(--black); }
+.tier b { font-family: var(--display); font-weight: 400; font-size: 40px; text-transform: uppercase; line-height: 1; }
+.tier ul { margin: 0; padding-left: 18px; font-size: 15px; }
+.pay { display: flex; gap: 8px; flex-wrap: wrap; }
+.pay span { font-family: var(--cond); font-weight: 600; text-transform: uppercase; letter-spacing: .06em; font-size: 14px; border: 1px solid currentColor; border-radius: 6px; padding: 4px 12px; }
+/* purchase flow */
+.flow { display: grid; grid-template-columns: 1fr 320px; gap: 32px; align-items: start; scroll-margin-top: 90px; }
+.flow > * { min-width: 0; }
+.steps-nav { list-style: none; margin: 0 0 24px; padding: 0; display: flex; gap: 8px; flex-wrap: wrap; counter-reset: s; }
+.steps-nav li { counter-increment: s; font-family: var(--cond); font-weight: 700; text-transform: uppercase; letter-spacing: .06em; font-size: 14px; padding: 6px 14px; border-radius: 999px; background: var(--paper); color: var(--grey); }
+.steps-nav li::before { content: counter(s) ". "; }
+.steps-nav li.on { background: var(--red); color: var(--white); }
+.steps-nav li.done { background: var(--black); color: var(--white); }
+.opt { display: flex; gap: 14px; align-items: center; border: 2px solid var(--line); border-radius: 12px; padding: 16px 18px; cursor: pointer; }
+.opt:has(input:checked) { border-color: var(--red); background: #FFF5F5; }
+.opt input { accent-color: var(--red); width: 20px; height: 20px; }
+.opt b { font-family: var(--cond); font-size: 22px; text-transform: uppercase; }
+.opt .pr { margin-left: auto; font-family: var(--display); font-size: 22px; white-space: nowrap; }
+.qty { display: inline-flex; align-items: center; gap: 0; border: 2px solid var(--line); border-radius: 999px; overflow: hidden; }
+.qty button { background: none; border: 0; font-size: 22px; width: 46px; height: 44px; cursor: pointer; }
+.qty span { min-width: 36px; text-align: center; font-family: var(--display); font-size: 22px; font-variant-numeric: tabular-nums; }
+.recap { position: sticky; top: 90px; background: var(--black); color: var(--white); border-radius: 14px; padding: 22px; display: grid; gap: 10px; }
+.recap b { font-family: var(--display); font-size: 26px; line-height: 1.1; }
+.eticket { background: var(--white); color: var(--black); border: 1px solid var(--line); border-radius: 18px; padding: 20px; display: grid; gap: 12px; max-width: 320px; box-shadow: 0 18px 40px -24px rgba(0,0,0,.4); }
+.eticket b { font-family: var(--display); font-weight: 400; font-size: 26px; line-height: 1; text-transform: uppercase; }
+.eticket canvas { width: 100%; aspect-ratio: 1; image-rendering: pixelated; display: block; }
+.eticket .rows { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; font-size: 14px; }
+.eticket .rows span { display: block; font-family: var(--cond); text-transform: uppercase; letter-spacing: .08em; color: var(--grey); font-size: 12px; }
+.tickets { display: flex; gap: 18px; flex-wrap: wrap; }
+.timeline { list-style: none; margin: 0; padding: 0; }
+.timeline li { display: grid; grid-template-columns: 160px 1fr; gap: 20px; padding-block: 20px; border-top: 1px solid var(--line); }
+.timeline .t { font-family: var(--mono); color: var(--red); }
+.timeline b { font-family: var(--cond); font-size: 24px; text-transform: uppercase; display: block; }
+.gate-out { margin-top: 16px; border-radius: 12px; padding: 18px; font-family: var(--cond); font-size: 24px; font-weight: 700; text-transform: uppercase; }
+.gate-out.good { background: #E3F3EA; color: var(--ok); }
+.gate-out.bad { background: #FDE8E8; color: var(--red-dark); }
+.gate-out.warn { background: #FBF0DC; color: #8A5300; }
+@media (max-width: 860px) { .flow { grid-template-columns: 1fr; } .recap { position: static; } .timeline li { grid-template-columns: 1fr; gap: 4px; } }
+</style>
+</head>
+<body class="site-enroutedu26mars">
+<div class="demo-bar"><div class="in"><span>Maquette de démonstration pour enroutedu26mars.com · proposée par Hamady Diallo</span><a href="../../proposition/index.html">← Retour à la proposition</a></div></div>
+<header class="hd"><div class="in">
+  <a class="logo" href="index.html">EN ROUTE DU 26 MARS</a>
+  <nav class="nav" id="nav" aria-label="Menu principal"><a href="index.html" aria-current="page">Accueil</a><a href="billets.html">Billets</a><a href="programme.html">Programme</a><a href="acces.html">Accès</a><a href="faq.html">FAQ</a></nav>
+  <div class="row"><a class="btn sm hd-cta" href="billets.html">Acheter mon billet</a><button class="burger" type="button" aria-expanded="false" aria-controls="nav">Menu</button></div>
+</div></header>
+<main>
+
+<section class="redbg e-hero"><div class="in">
+  <div class="kicker">Yacou B OG · En concert · Date à annoncer</div>
+  <h1 class="h-xl">Stade du<br>26 Mars</h1>
+  <div class="count" data-countdown aria-label="Compte à rebours de démonstration">
+    <div><b data-cd="d">--</b><small>Jours</small></div><div><b data-cd="h">--</b><small>Heures</small></div><div><b data-cd="m">--</b><small>Min</small></div><div><b data-cd="s">--</b><small>Sec</small></div>
+  </div>
+  <p class="note" style="color:rgba(255,255,255,.8)">Compte à rebours de démonstration : il sera réglé sur la date officielle.</p>
+  <div class="row"><a class="btn black" href="billets.html">Acheter mon billet</a><a class="btn line" href="programme.html">Programme</a></div>
+  <div class="pay"><span>Orange Money</span><span>Moov Money</span><span>Carte bancaire</span></div>
+</div></section>
+<section class="sec"><div class="in">
+  <div class="sec-head"><h2 class="h-l">Les billets</h2><a class="btn sm" href="billets.html">Acheter</a></div>
+  <div class="grid g3">
+  <div class="tier"><span class="kicker">Catégorie</span><b>Pelouse</b><ul><li>Accès pelouse, debout</li><li>Entrée porte A</li></ul><span class="price">Prix à annoncer</span></div>
+  <div class="tier"><span class="kicker">Catégorie</span><b>Tribune</b><ul><li>Place assise en tribune</li><li>Entrée porte B</li></ul><span class="price">Prix à annoncer</span></div>
+  <div class="tier vip"><span class="kicker">Catégorie</span><b>VIP</b><ul><li>Espace réservé face à la scène</li><li>Entrée dédiée, boissons</li></ul><span class="price">Prix à annoncer</span></div>
+</div>
+</div></section>
+<section class="sec dark"><div class="in grid g3">
+  <div style="display:grid;gap:8px"><div class="kicker">Billet sur téléphone</div><p>Après paiement, le billet arrive par SMS, WhatsApp et e-mail avec un QR code unique.</p></div>
+  <div style="display:grid;gap:8px"><div class="kicker">Entrée rapide</div><p>Le QR code est scanné aux portes. Un billet ne peut servir qu'une seule fois.</p></div>
+  <div style="display:grid;gap:8px"><div class="kicker">Infos pratiques</div><p>Accès, ouverture des portes, objets interdits : tout est sur la page <a href="acces.html">Accès</a>.</p></div>
+</div></section>
+<section class="sec paper"><div class="in" style="display:grid;gap:16px">
+  <div class="kicker">Partenaires</div>
+  <div class="grid g4"><div class="ph light" style="aspect-ratio:3/2"><span class="cap">Logo partenaire</span></div><div class="ph light" style="aspect-ratio:3/2"><span class="cap">Logo partenaire</span></div><div class="ph light" style="aspect-ratio:3/2"><span class="cap">Logo partenaire</span></div><div class="ph light" style="aspect-ratio:3/2"><span class="cap">Logo partenaire</span></div></div>
+</div></section>
+
+</main>
+<footer class="ft"><div class="in">
+  <div><span class="logo">EN ROUTE DU 26 MARS</span><p>Yacou B OG au Stade du 26 Mars, Bamako.</p><p class="note" style="margin-top:12px">Maquette : textes et visuels provisoires, à remplacer par les contenus de l'équipe.</p></div>
+  <div><b>Suivre</b>
+  <a href="https://www.youtube.com/@yacoubog" target="_blank" rel="noopener">YouTube</a>
+  <a href="https://www.instagram.com/yacou_b_og_off/" target="_blank" rel="noopener">Instagram</a>
+  <a href="https://www.facebook.com/yacoubogoff" target="_blank" rel="noopener">Facebook</a>
+  <a href="https://x.com/yacoubogoff" target="_blank" rel="noopener">X</a></div>
+  <div><b>Les autres sites</b><a href="../yacoubog/index.html">yacoubog.com</a><a href="../civilisationmalienne/index.html">civilisationmalienne.com</a></div>
+</div></footer>
+<script src="../assets/demo.js"></script>
+</body>
+</html>

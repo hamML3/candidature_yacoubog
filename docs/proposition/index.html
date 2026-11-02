@@ -1,0 +1,576 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>Refonte Yacou B OG</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Barlow:wght@400;500;600;700&family=Barlow+Condensed:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a proposal document in the client's own poster language (red, charcoal, white), with three live mock screens as the centrepiece */
+:root {
+  --paper: #FFFFFF;
+  --paper-2: #F6F3F3;
+  --ink: #2E2B2C;
+  --muted: #6B6466;
+  --line: #E6DFE0;
+  --red: #E3141B;
+  --red-ink: #C4060D;
+  --red-soft: #FDE8E8;
+  --ok: #1E7A46; --ok-soft: #E3F3EA;
+  --warn: #A76200; --warn-soft: #FBF0DC;
+  /* mock screens keep the brand look in both themes */
+  --m-black: #111010; --m-white: #FFFFFF; --m-red: #E3141B; --m-grey: #8B8486; --m-dark: #1E1C1D;
+  --display: "Anton", "Impact", "Arial Narrow", sans-serif;
+  --cond: "Barlow Condensed", "Arial Narrow", sans-serif;
+  --body: "Barlow", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #161415; --paper-2: #1F1C1D; --ink: #F1ECEC; --muted: #AFA6A8; --line: #332E30;
+    --red: #FF3B41; --red-ink: #FF6A6F; --red-soft: #3A1517;
+    --ok: #5FD08F; --ok-soft: #14301F; --warn: #F2B24C; --warn-soft: #34270F; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #161415; --paper-2: #1F1C1D; --ink: #F1ECEC; --muted: #AFA6A8; --line: #332E30;
+  --red: #FF3B41; --red-ink: #FF6A6F; --red-soft: #3A1517;
+  --ok: #5FD08F; --ok-soft: #14301F; --warn: #F2B24C; --warn-soft: #34270F; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body {
+  background: var(--paper); color: var(--ink);
+  font-family: var(--body); font-size: 17px; line-height: 1.6;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+.wrap { max-width: 1120px; margin: 0 auto; }
+a { color: var(--red-ink); text-underline-offset: 3px; }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--red); outline-offset: 3px; border-radius: 4px; }
+h1, h2, h3 { margin: 0; text-wrap: balance; }
+p { margin: 0; }
+.eyebrow { font-family: var(--cond); font-weight: 700; font-size: 14px; letter-spacing: .14em; text-transform: uppercase; color: var(--red-ink); }
+.lead { font-size: 19px; max-width: 62ch; color: var(--muted); }
+
+/* Cover */
+.cover { padding-block: 40px 56px; display: grid; gap: 22px; position: relative; }
+.cover .meta { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px 20px; font-family: var(--mono); font-size: 12px; color: var(--muted); padding-bottom: 18px; border-bottom: 1px solid var(--line); }
+.cover h1 { font-family: var(--display); font-weight: 400; font-size: clamp(46px, 9vw, 112px); line-height: .95; text-transform: uppercase; letter-spacing: .005em; }
+.cover h1 em { font-style: normal; color: var(--red); display: block; }
+.domains { display: flex; flex-wrap: wrap; gap: 10px; }
+.domains span { font-family: var(--cond); font-weight: 700; font-size: 17px; letter-spacing: .04em; text-transform: uppercase; border-bottom: 2px solid var(--red); padding-bottom: 1px; }
+
+section { padding-block: 56px; border-top: 1px solid var(--line); }
+.sec-head { display: grid; gap: 10px; margin-bottom: 30px; }
+.sec-head h2 { font-family: var(--display); font-weight: 400; font-size: clamp(32px, 5vw, 54px); line-height: 1; text-transform: uppercase; }
+
+/* Audit */
+.audit { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+.site { border: 1px solid var(--line); border-radius: 12px; padding: 22px; display: grid; gap: 14px; align-content: start; background: var(--paper); }
+.site > * { min-width: 0; }
+.site h3 { font-family: var(--cond); font-weight: 700; font-size: 24px; letter-spacing: .02em; overflow-wrap: anywhere; }
+.pill { justify-self: start; font-family: var(--mono); font-size: 12px; padding: 3px 10px; border-radius: 999px; }
+.pill.bad { background: var(--red-soft); color: var(--red-ink); }
+.pill.warn { background: var(--warn-soft); color: var(--warn); }
+.site .sum { color: var(--muted); font-size: 16px; }
+.issues { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; font-size: 15px; }
+.issues li { display: grid; grid-template-columns: 14px 1fr; gap: 8px; }
+.issues li::before { content: ""; width: 8px; height: 8px; margin-top: 8px; border-radius: 2px; background: var(--red); }
+.issues code { font-family: var(--mono); font-size: 13px; background: var(--paper-2); padding: 0 4px; border-radius: 3px; }
+.audit-note { margin-top: 16px; font-family: var(--mono); font-size: 12px; color: var(--muted); }
+
+/* Ecosystem */
+.eco { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; border: 2px solid var(--ink); border-radius: 12px; overflow: hidden; }
+.eco > div { padding: 22px; display: grid; gap: 8px; align-content: start; border-right: 2px solid var(--ink); }
+.eco > div:last-child { border-right: 0; }
+.eco .role { font-family: var(--cond); font-weight: 700; text-transform: uppercase; letter-spacing: .1em; font-size: 13px; color: var(--red-ink); }
+.eco h3 { font-family: var(--display); font-weight: 400; font-size: 28px; text-transform: uppercase; line-height: 1.05; }
+.eco p { color: var(--muted); font-size: 16px; }
+.shared { margin-top: -2px; border: 2px solid var(--ink); border-top: 0; border-radius: 0 0 12px 12px; padding: 16px 22px; background: var(--ink); color: var(--paper); display: flex; flex-wrap: wrap; gap: 8px 22px; align-items: center; }
+.shared b { font-family: var(--cond); text-transform: uppercase; letter-spacing: .1em; font-size: 13px; }
+.shared span { font-size: 15px; }
+.eco-wrap .eco { border-radius: 12px 12px 0 0; }
+
+/* Mock screens */
+.mock-block { display: grid; gap: 22px; margin-top: 44px; }
+.mock-block:first-of-type { margin-top: 0; }
+.mock-head { display: flex; justify-content: space-between; align-items: end; gap: 12px 24px; flex-wrap: wrap; }
+.mock-head h3 { font-family: var(--display); font-weight: 400; font-size: clamp(26px, 3.6vw, 38px); text-transform: uppercase; line-height: 1; }
+.mock-head p { color: var(--muted); max-width: 54ch; font-size: 16px; }
+.browser { border-radius: 12px; overflow: hidden; border: 1px solid var(--line); box-shadow: 0 18px 50px -24px rgba(0,0,0,.35); background: var(--m-dark); }
+.chrome { display: flex; align-items: center; gap: 8px; padding: 10px 14px; background: var(--paper-2); border-bottom: 1px solid var(--line); }
+.chrome i { width: 10px; height: 10px; border-radius: 50%; background: var(--line); }
+.chrome .url { margin-left: 8px; flex: 1; min-width: 0; font-family: var(--mono); font-size: 12px; color: var(--muted); background: var(--paper); border-radius: 6px; padding: 4px 10px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.screen { container-type: inline-size; }
+.features { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px 28px; }
+.features div { display: grid; gap: 4px; align-content: start; }
+.features b { font-family: var(--cond); font-size: 19px; font-weight: 700; }
+.features span { font-size: 15px; color: var(--muted); }
+.demo-link { font-family: var(--cond); font-weight: 700; text-transform: uppercase; letter-spacing: .06em; background: var(--red); color: #fff; padding: 10px 20px; border-radius: 999px; text-decoration: none; white-space: nowrap; }
+.demo-link:hover { background: var(--red-ink); }
+.screen-link { display: block; text-decoration: none; color: inherit; }
+.flag { font-family: var(--mono); font-size: 12px; color: var(--warn); background: var(--warn-soft); padding: 6px 10px; border-radius: 6px; justify-self: start; }
+
+/* Mock 1: yacoubog.com */
+.m1 { background: var(--m-black); color: var(--m-white); font-family: var(--body); }
+.m-nav { display: flex; justify-content: space-between; align-items: center; padding: 2.4cqi 4cqi; gap: 2cqi; }
+.m-logo { font-family: var(--display); font-size: max(13px, 2.6cqi); letter-spacing: .02em; }
+.m-links { display: flex; gap: 2.6cqi; font-family: var(--cond); font-weight: 600; text-transform: uppercase; font-size: max(10px, 1.45cqi); letter-spacing: .08em; color: var(--m-grey); }
+.m-links .on { color: var(--m-white); }
+.m-btn { display: inline-block; font-family: var(--cond); font-weight: 700; text-transform: uppercase; letter-spacing: .06em; font-size: max(10px, 1.5cqi); padding: 1cqi 2.2cqi; border-radius: 99px; background: var(--m-red); color: var(--m-white); white-space: nowrap; }
+.m-btn.line { background: transparent; border: 1.5px solid currentColor; }
+.m1-hero { display: grid; grid-template-columns: 1.25fr 1fr; gap: 4cqi; padding: 3cqi 4cqi 5cqi; align-items: center; }
+.m1-hero .k { font-family: var(--cond); font-weight: 600; text-transform: uppercase; letter-spacing: .16em; font-size: max(10px, 1.4cqi); color: var(--m-red); }
+.m1-hero h4 { margin: 1cqi 0 2cqi; font-family: var(--display); font-weight: 400; font-size: 11cqi; line-height: .88; text-transform: uppercase; }
+.m1-hero .row { display: flex; gap: 1.4cqi; flex-wrap: wrap; }
+.plat { display: flex; gap: 1.2cqi; flex-wrap: wrap; margin-top: 2.4cqi; font-family: var(--cond); font-weight: 600; font-size: max(9px, 1.3cqi); text-transform: uppercase; letter-spacing: .06em; color: var(--m-grey); }
+.plat span { border: 1px solid #3A3637; padding: .5cqi 1.2cqi; border-radius: 4px; }
+.art { aspect-ratio: 1; max-width: 100%; border-radius: 1.2cqi; position: relative; overflow: hidden;
+  background: radial-gradient(circle at 70% 30%, var(--m-red) 0 22%, transparent 22.5%), repeating-linear-gradient(-35deg, #2A2627 0 1.2cqi, #1A1718 1.2cqi 2.4cqi); }
+.art span { position: absolute; left: 6%; bottom: 6%; font-family: var(--display); font-size: 5.4cqi; line-height: .9; text-transform: uppercase; }
+.m1-dates { background: var(--m-white); color: var(--m-black); padding: 4cqi; display: grid; gap: 1.6cqi; }
+.m1-dates .t { display: flex; justify-content: space-between; align-items: baseline; }
+.m1-dates h5 { margin: 0; font-family: var(--display); font-weight: 400; font-size: 4.4cqi; text-transform: uppercase; }
+.m1-dates .t small { font-family: var(--cond); font-size: max(10px, 1.4cqi); color: var(--m-grey); text-transform: uppercase; letter-spacing: .1em; }
+.gig { display: grid; grid-template-columns: 14cqi 1fr auto; align-items: center; gap: 2cqi; padding-block: 1.4cqi; border-top: 1px solid #E5E0E1; font-size: max(11px, 1.7cqi); }
+.gig .d { font-family: var(--cond); font-weight: 700; text-transform: uppercase; color: var(--m-red); letter-spacing: .04em; }
+.gig b { font-family: var(--cond); font-size: max(12px, 2.1cqi); text-transform: uppercase; }
+.gig .v { color: var(--m-grey); }
+.gig.big { background: var(--m-red); color: var(--m-white); border-radius: 1cqi; padding-inline: 2cqi; border: 0; }
+.gig.big .d, .gig.big .v { color: var(--m-white); }
+.gig.big .m-btn { background: var(--m-white); color: var(--m-red); }
+
+/* Mock 2: civilisationmalienne.com */
+.m2 { background: var(--m-white); color: var(--m-black); }
+.m2 .m-nav { border-bottom: 1px solid #ECE7E8; }
+.m2 .m-links { color: var(--m-grey); }
+.m2 .m-links .on { color: var(--m-black); }
+.m2-hero { position: relative; padding: 6cqi 4cqi 5cqi; overflow: hidden; }
+.m2-hero::before { content: ""; position: absolute; right: -8cqi; top: -10cqi; width: 46cqi; height: 46cqi; border: 5cqi solid var(--m-red); border-radius: 50%; border-left-color: transparent; transform: rotate(-20deg); }
+.m2-hero .k { position: relative; font-family: var(--cond); font-weight: 700; letter-spacing: .2em; text-transform: uppercase; font-size: max(10px, 1.5cqi); color: var(--m-red); }
+.m2-hero h4 { position: relative; margin: 1.4cqi 0 2.2cqi; font-family: var(--display); font-weight: 400; font-size: 9.5cqi; line-height: .9; text-transform: uppercase; max-width: 70%; }
+.m2-hero h4 span { color: var(--m-red); }
+.m2-hero p { position: relative; max-width: 52%; font-size: max(11px, 1.8cqi); color: #4A4546; margin-bottom: 2.4cqi; }
+.m2-tiles { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.6cqi; padding: 0 4cqi 4cqi; }
+.m2-team { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.6cqi; padding: 0 4cqi 2.4cqi; }
+.mate { display: grid; gap: .6cqi; justify-items: start; }
+.mate i { width: 100%; aspect-ratio: 4 / 3; border-radius: 1cqi; background: repeating-linear-gradient(-45deg, #EFEAEA 0 1cqi, #F7F4F4 1cqi 2cqi); border-bottom: .6cqi solid var(--m-red); }
+.mate b { font-family: var(--cond); font-weight: 700; text-transform: uppercase; letter-spacing: .04em; font-size: max(11px, 1.9cqi); }
+.mate small { font-size: max(9px, 1.3cqi); color: var(--m-grey); }
+.tile { border-radius: 1cqi; padding: 2cqi; min-height: 18cqi; display: grid; align-content: space-between; gap: 2cqi; background: #F4F0F0; }
+.tile.r { background: var(--m-red); color: var(--m-white); }
+.tile.k { background: var(--m-black); color: var(--m-white); }
+.tile small { font-family: var(--cond); font-weight: 600; text-transform: uppercase; letter-spacing: .12em; font-size: max(9px, 1.25cqi); opacity: .75; }
+.tile b { font-family: var(--display); font-weight: 400; font-size: 3.2cqi; line-height: 1; text-transform: uppercase; }
+
+/* Mock 3: enroutedu26mars.com */
+.m3 { background: var(--m-red); color: var(--m-white); position: relative; overflow: hidden; }
+.m3::before { content: "26"; position: absolute; right: -3cqi; top: -9cqi; font-family: var(--display); font-size: 62cqi; line-height: 1; color: rgba(0,0,0,.12); pointer-events: none; }
+.m3 .m-nav, .m3-grid { position: relative; }
+.m3 .m-links { color: rgba(255,255,255,.75); }
+.m3 .m-btn { background: var(--m-black); }
+.m3-grid { display: grid; grid-template-columns: 1.3fr .7fr; gap: 4cqi; padding: 3cqi 4cqi 4cqi; align-items: start; }
+.m3-grid > * { min-width: 0; }
+.m3 .k { font-family: var(--cond); font-weight: 700; text-transform: uppercase; letter-spacing: .2em; font-size: max(10px, 1.5cqi); }
+.m3 h4 { margin: 1cqi 0 2.4cqi; font-family: var(--display); font-weight: 400; font-size: 8.4cqi; line-height: .9; text-transform: uppercase; }
+.count { display: flex; gap: 1.2cqi; margin-bottom: 1.2cqi; }
+.m3 .demo { font-size: max(9px, 1.3cqi); opacity: .85; margin-bottom: 2.4cqi; }
+.count div { background: var(--m-black); border-radius: 1cqi; padding: 1.2cqi 1.6cqi; min-width: 10cqi; text-align: center; }
+.count b { display: block; font-family: var(--display); font-weight: 400; font-size: 5.4cqi; line-height: 1; font-variant-numeric: tabular-nums; }
+.count small { font-family: var(--cond); text-transform: uppercase; letter-spacing: .12em; font-size: max(9px, 1.2cqi); color: var(--m-grey); }
+.tiers { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.4cqi; }
+.tier { background: var(--m-white); color: var(--m-black); border-radius: 1cqi; padding: 1.8cqi; display: grid; gap: .8cqi; }
+.tier b { font-family: var(--display); font-weight: 400; font-size: 3cqi; text-transform: uppercase; line-height: 1; }
+.tier small { font-size: max(9px, 1.3cqi); color: var(--m-grey); }
+.tier.vip { background: var(--m-black); color: var(--m-white); }
+.pay { display: flex; flex-wrap: wrap; gap: 1cqi; margin-top: 2cqi; font-family: var(--cond); font-weight: 600; font-size: max(9px, 1.3cqi); text-transform: uppercase; letter-spacing: .06em; }
+.pay span { border: 1px solid rgba(255,255,255,.55); border-radius: 4px; padding: .4cqi 1.2cqi; }
+.phone { background: var(--m-black); border-radius: 3.4cqi; padding: 1.2cqi; max-width: 100%; }
+.ticket { background: var(--m-white); color: var(--m-black); border-radius: 2.4cqi; padding: 2.4cqi; display: grid; gap: 1.4cqi; }
+.ticket .k { color: var(--m-red); font-size: max(9px, 1.2cqi); }
+.ticket b { font-family: var(--display); font-weight: 400; font-size: 3.4cqi; line-height: .95; text-transform: uppercase; }
+.ticket canvas { width: 100%; aspect-ratio: 1; display: block; image-rendering: pixelated; }
+.ticket .rows { display: grid; grid-template-columns: 1fr 1fr; gap: .6cqi; font-size: max(9px, 1.25cqi); }
+.ticket .rows span { color: var(--m-grey); display: block; font-family: var(--cond); text-transform: uppercase; letter-spacing: .08em; }
+
+/* Tech table */
+.tbl-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 12px; }
+table { width: 100%; border-collapse: collapse; min-width: 640px; font-size: 16px; }
+th, td { text-align: left; vertical-align: top; padding: 14px 18px; border-bottom: 1px solid var(--line); }
+tr:last-child td { border-bottom: 0; }
+th { font-family: var(--cond); font-weight: 700; text-transform: uppercase; letter-spacing: .1em; font-size: 13px; color: var(--muted); background: var(--paper-2); }
+td:first-child { font-family: var(--cond); font-weight: 700; font-size: 18px; white-space: nowrap; }
+.targets { margin-top: 22px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+.targets div { border-top: 3px solid var(--red); padding-top: 10px; display: grid; gap: 2px; }
+.targets b { font-family: var(--display); font-weight: 400; font-size: 34px; line-height: 1.05; font-variant-numeric: tabular-nums; }
+.targets span { font-size: 15px; color: var(--muted); }
+
+/* Plan: a real sequence */
+.plan { list-style: none; margin: 0; padding: 0; display: grid; gap: 0; }
+.plan li { display: grid; grid-template-columns: 150px 1fr; gap: 24px; padding-block: 18px; border-top: 1px solid var(--line); }
+.plan li > * { min-width: 0; }
+.plan .when { font-family: var(--mono); font-size: 13px; color: var(--red-ink); padding-top: 3px; }
+.plan b { font-family: var(--cond); font-size: 21px; font-weight: 700; display: block; }
+.plan span { color: var(--muted); font-size: 16px; }
+
+.questions { display: grid; grid-template-columns: 1fr 1fr; gap: 12px 32px; margin: 0; padding-left: 20px; }
+.questions li { padding-left: 4px; }
+
+.sign { background: var(--ink); color: var(--paper); border-radius: 16px; padding: clamp(24px, 5vw, 44px); display: grid; gap: 18px; }
+.sign h2 { font-family: var(--display); font-weight: 400; font-size: clamp(32px, 5vw, 54px); text-transform: uppercase; line-height: 1; }
+.sign .who { display: grid; gap: 6px; font-family: var(--mono); font-size: 14px; }
+.sign a { color: var(--paper); }
+footer { padding-block: 26px 40px; font-family: var(--mono); font-size: 12px; color: var(--muted); }
+
+@media (max-width: 900px) {
+  .audit, .eco, .features { grid-template-columns: 1fr; }
+  .eco > div { border-right: 0; border-bottom: 2px solid var(--ink); }
+  .eco > div:last-child { border-bottom: 0; }
+  .targets { grid-template-columns: 1fr 1fr; }
+  .questions { grid-template-columns: 1fr; }
+  .plan li { grid-template-columns: 1fr; gap: 4px; }
+  .m-links { display: none; }
+}
+@media (max-width: 560px) {
+  .m1-hero, .m3-grid { grid-template-columns: 1fr; }
+  .m1-hero h4 { font-size: 15cqi; }
+  .m2-hero h4 { max-width: 100%; font-size: 12cqi; }
+  .m2-hero p { max-width: 100%; }
+  .m2-tiles, .m2-team { grid-template-columns: 1fr 1fr; }
+  .tile b { font-size: 5cqi; }
+  .m3 h4 { font-size: 12cqi; }
+  .count b { font-size: 8cqi; }
+  .tier b { font-size: 5cqi; }
+  .phone { max-width: 70%; justify-self: center; }
+  .ticket b { font-size: 6cqi; }
+  .gig { grid-template-columns: 1fr auto; }
+  .gig .d { grid-column: 1 / -1; }
+  .art span { font-size: 9cqi; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .count b { transition: opacity .2s; }
+}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header class="cover">
+    <div class="meta">
+      <span>Proposition de refonte · 2 novembre 2026</span>
+      <span>Pour : Yacou B OG · Civilisation Malienne</span>
+      <span>De : Hamady Ibrahim Diallo · <a href="../index.html">Accueil candidature</a></span>
+    </div>
+    <div class="eyebrow">Réponse à l'appel à candidature</div>
+    <h1>Trois sites,<em>une seule route</em>jusqu'au stade</h1>
+    <p class="lead">Aujourd'hui, un seul des trois sites est réellement en ligne. Je propose de les reconstruire comme un ensemble cohérent : l'artiste, son équipe et l'événement, avec une billetterie qui fonctionne et un design qui reprend votre identité rouge et noir.</p>
+    <div class="domains"><span>yacoubog.com</span><span>civilisationmalienne.com</span><span>enroutedu26mars.com</span></div>
+  </header>
+
+  <section>
+    <div class="sec-head">
+      <div class="eyebrow">État des lieux</div>
+      <h2>Ce que j'ai trouvé en visitant les sites</h2>
+    </div>
+    <div class="audit">
+      <article class="site">
+        <span class="pill warn">En ligne, avec des défauts</span>
+        <h3>yacoubog.com</h3>
+        <p class="sum">Site WordPress d'une page avec Slider Revolution et WPForms. La musique est bien mise en avant, mais plusieurs parties ne fonctionnent pas.</p>
+        <ul class="issues">
+          <li><span>Les boutons « Buy Tickets » mènent vers <code>#</code> : aucun billet ne peut être acheté.</span></li>
+          <li><span>La section « Dernier clip » est vide.</span></li>
+          <li><span>Le lien Apple Music ouvre le Google Play Store.</span></li>
+          <li><span>Concerts sans année et non triés (Bruxelles, Kangaba, Kéniéba, Kita).</span></li>
+          <li><span>Biographie à mettre à jour (« 26 ans » pour un artiste né en 1998) et coquilles : « fait appelle », « atterrit ».</span></li>
+          <li><span>Images de démonstration <code>dummy.png</code> encore présentes, textes alternatifs vides ou génériques.</span></li>
+          <li><span>Pas de boutique, pas d'espace presse ni de formulaire de booking clair.</span></li>
+        </ul>
+      </article>
+      <article class="site">
+        <span class="pill bad">Aucun site en ligne</span>
+        <h3>civilisationmalienne.com</h3>
+        <p class="sum">Le domaine affiche la page de parking par défaut de Hostinger, en anglais, avec des publicités pour l'hébergeur.</p>
+        <ul class="issues">
+          <li><span>Un visiteur ne trouve ni présentation de l'équipe, ni contact, ni lien vers l'artiste.</span></li>
+          <li><span>La page fait la promotion d'Hostinger au lieu de l'équipe Civilisation Malienne.</span></li>
+          <li><span>Pas d'adresse e-mail professionnelle visible sur ce domaine.</span></li>
+        </ul>
+      </article>
+      <article class="site">
+        <span class="pill bad">Page d'attente vide</span>
+        <h3>enroutedu26mars.com</h3>
+        <p class="sum">Une seule page : « Il se passe quelque chose ! », un compte à rebours bloqué à zéro et une icône WhatsApp.</p>
+        <ul class="issues">
+          <li><span>Le compte à rebours affiche 0 jour, 0 heure : il n'a pas de date cible.</span></li>
+          <li><span>Aucune mention du concert, du Stade du 26 Mars, de la date ou du prix.</span></li>
+          <li><span>Pas de billetterie, alors que c'est le site qui va recevoir le plus de visiteurs.</span></li>
+          <li><span>Le lien WhatsApp n'a pas de numéro de destination. Le pied de page renvoie au thème d'origine.</span></li>
+        </ul>
+      </article>
+    </div>
+    <p class="audit-note">Constats relevés le 2 novembre 2026 sur les versions publiques des trois domaines.</p>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <div class="eyebrow">La proposition</div>
+      <h2>Chaque site a un rôle précis</h2>
+      <p class="lead">Les trois sites partagent la même identité visuelle et les mêmes outils. Un fan peut passer de l'un à l'autre sans se perdre, et votre équipe gère tout depuis un seul espace.</p>
+    </div>
+    <div class="eco-wrap">
+      <div class="eco">
+        <div><span class="role">L'artiste</span><h3>yacoubog.com</h3><p>Musique, clips, dates de concerts, biographie, boutique et contact booking. La page que l'on partage en premier.</p></div>
+        <div><span class="role">L'équipe</span><h3>civilisationmalienne.com</h3><p>Le site de l'équipe derrière Yacou B OG : qui fait quoi, les coulisses, les projets en cours, et le contact pour les partenaires et la presse.</p></div>
+        <div><span class="role">L'événement</span><h3>enroutedu26mars.com</h3><p>Tout pour le concert au Stade du 26 Mars : compte à rebours, billetterie, infos pratiques, programme et partenaires.</p></div>
+      </div>
+      <div class="shared"><b>En commun</b><span>Charte rouge et noir</span><span>Une billetterie</span><span>Une liste de fans (e-mail, WhatsApp)</span><span>Un espace d'administration</span><span>Statistiques de visite</span></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <div class="eyebrow">Maquettes</div>
+      <h2>À quoi ressembleront les pages d'accueil</h2>
+      <p class="lead">Premières pistes, construites à partir de votre affiche. Les dates, prix et textes sont indicatifs et seront remplacés par vos contenus.</p>
+    </div>
+
+    <div class="mock-block">
+      <div class="mock-head">
+        <h3>yacoubog.com</h3>
+        <p>La dernière sortie en grand, les plateformes d'écoute en un clic, et les dates de concert avec un vrai bouton d'achat.</p><a class="demo-link" href="../demos/yacoubog/index.html">Visiter la démo →</a>
+      </div>
+      <div class="browser">
+        <div class="chrome"><i></i><i></i><i></i><span class="url">https://yacoubog.com</span></div>
+        <div class="screen">
+          <div class="m1">
+            <div class="m-nav">
+              <span class="m-logo">YACOU B OG</span>
+              <span class="m-links"><span class="on">Musique</span><span>Clips</span><span>Concerts</span><span>Boutique</span><span>Bio</span><span>Booking</span></span>
+              <span class="m-btn">Billets</span>
+            </div>
+            <div class="m1-hero">
+              <div>
+                <div class="k">Dernier projet · EP · 5 titres</div>
+                <h4>Baye<br>Fall 1</h4>
+                <div class="row"><span class="m-btn">Écouter l'EP</span><span class="m-btn line">Voir le clip</span></div>
+                <div class="plat"><span>Spotify</span><span>Apple Music</span><span>Audiomack</span><span>YouTube</span><span>Boomplay</span></div>
+              </div>
+              <div class="art" aria-hidden="true"><span>Baye<br>Fall 1</span></div>
+            </div>
+            <div class="m1-dates">
+              <div class="t"><h5>Concerts</h5><small>Toutes les dates</small></div>
+              <div class="gig big"><span class="d">Date à annoncer</span><span><b>Bamako</b> <span class="v">· Stade du 26 Mars</span></span><span class="m-btn">Billets</span></div>
+              <div class="gig"><span class="d">À venir</span><span><b>Kita</b></span><span class="m-btn line">Infos</span></div>
+              <div class="gig"><span class="d">À venir</span><span><b>Kéniéba</b></span><span class="m-btn line">Infos</span></div>
+              <div class="gig"><span class="d">À venir</span><span><b>Bruxelles</b> <span class="v">· Belgique</span></span><span class="m-btn line">Infos</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="features">
+        <div><b>Discographie complète</b><span>Baye Fall 1, Venom I à III, Koungo Fitini, avec extraits et liens vérifiés vers chaque plateforme.</span></div>
+        <div><b>Concerts triés par date</b><span>Les dates passées passent dans l'historique automatiquement. Chaque concert a sa page.</span></div>
+        <div><b>Boutique et booking</b><span>Merch payable par mobile money. Formulaire de booking qui arrive directement au management.</span></div>
+      </div>
+    </div>
+
+    <div class="mock-block">
+      <div class="mock-head">
+        <h3>civilisationmalienne.com</h3>
+        <p>Le domaine devient le site de l'équipe. Il montre les personnes qui portent le projet et renvoie vers l'artiste et vers l'événement.</p><a class="demo-link" href="../demos/civilisationmalienne/index.html">Visiter la démo →</a>
+      </div>
+      <div class="browser">
+        <div class="chrome"><i></i><i></i><i></i><span class="url">https://civilisationmalienne.com</span></div>
+        <div class="screen">
+          <div class="m2">
+            <div class="m-nav">
+              <span class="m-logo">CIVILISATION MALIENNE</span>
+              <span class="m-links"><span class="on">L'équipe</span><span>Yacou B OG</span><span>Projets</span><span>Coulisses</span><span>Contact</span></span>
+              <span class="m-btn">Travailler avec nous</span>
+            </div>
+            <div class="m2-hero">
+              <div class="k">L'équipe de Yacou B OG · Bamako</div>
+              <h4>Civilisation <span>Malienne</span></h4>
+              <p>Management, booking, communication, production : l'équipe qui porte Yacou B OG de Kati jusqu'au Stade du 26 Mars.</p>
+              <span class="m-btn">Rencontrer l'équipe</span>
+            </div>
+            <div class="m2-team">
+              <div class="mate"><i aria-hidden="true"></i><b>Management</b><small>Nom et photo</small></div>
+              <div class="mate"><i aria-hidden="true"></i><b>Booking</b><small>Nom et photo</small></div>
+              <div class="mate"><i aria-hidden="true"></i><b>Communication</b><small>Nom et photo</small></div>
+              <div class="mate"><i aria-hidden="true"></i><b>Production</b><small>Nom et photo</small></div>
+            </div>
+            <div class="m2-tiles">
+              <div class="tile k"><small>L'artiste</small><b>Yacou B OG</b></div>
+              <div class="tile r"><small>Le projet</small><b>En route du 26 Mars</b></div>
+              <div class="tile"><small>Coulisses</small><b>Studio, tournée, vidéos</b></div>
+              <div class="tile"><small>Partenaires</small><b>Sponsors et presse</b></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="features">
+        <div><b>L'équipe présentée</b><span>Une fiche par membre : rôle, photo, contact direct. Les partenaires savent tout de suite à qui s'adresser.</span></div>
+        <div><b>Coulisses et actualités</b><span>Photos et vidéos de studio, de tournée et de préparation du concert, publiées par l'équipe elle-même.</span></div>
+        <div><b>Espace partenaires</b><span>Dossier de presse, offres de sponsoring pour le concert et formulaire de contact professionnel.</span></div>
+      </div>
+    </div>
+
+    <div class="mock-block">
+      <div class="mock-head">
+        <h3>enroutedu26mars.com</h3>
+        <p>Le site le plus urgent. Il doit vendre les billets, tenir la charge le jour de l'ouverture des ventes et rassurer sur l'accès au stade.</p><a class="demo-link" href="../demos/enroutedu26mars/index.html">Visiter la démo →</a>
+      </div>
+      <div class="browser">
+        <div class="chrome"><i></i><i></i><i></i><span class="url">https://enroutedu26mars.com</span></div>
+        <div class="screen">
+          <div class="m3">
+            <div class="m-nav">
+              <span class="m-logo">EN ROUTE DU 26 MARS</span>
+              <span class="m-links"><span class="on">Billets</span><span>Programme</span><span>Accès</span><span>FAQ</span><span>Partenaires</span></span>
+              <span class="m-btn">Acheter</span>
+            </div>
+            <div class="m3-grid">
+              <div>
+                <div class="k">Yacou B OG · En concert · Date à annoncer</div>
+                <h4>Stade du<br>26 Mars · Bamako</h4>
+                <div class="count" aria-label="Compte à rebours d'exemple">
+                  <div><b id="cd-d">--</b><small>Jours</small></div>
+                  <div><b id="cd-h">--</b><small>Heures</small></div>
+                  <div><b id="cd-m">--</b><small>Min</small></div>
+                  <div><b id="cd-s">--</b><small>Sec</small></div>
+                </div>
+                <p class="demo">Compte à rebours de démonstration : il sera réglé sur la date officielle.</p>
+                <div class="tiers">
+                  <div class="tier"><small>Catégorie</small><b>Pelouse</b><small>Prix à annoncer</small></div>
+                  <div class="tier"><small>Catégorie</small><b>Tribune</b><small>Prix à annoncer</small></div>
+                  <div class="tier vip"><small>Catégorie</small><b>VIP</b><small>Prix à annoncer</small></div>
+                </div>
+                <div class="pay"><span>Orange Money</span><span>Moov Money</span><span>Carte bancaire</span></div>
+              </div>
+              <div class="phone" aria-label="Aperçu d'un billet électronique">
+                <div class="ticket">
+                  <div class="k">Billet électronique</div>
+                  <b>Yacou B OG<br>Stade du 26 Mars</b>
+                  <canvas id="qr" width="29" height="29" aria-hidden="true"></canvas>
+                  <div class="rows"><div><span>Catégorie</span>Tribune</div><div><span>Billet</span>N° 000124</div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="features">
+        <div><b>Billets par mobile money</b><span>Paiement Orange Money, Moov Money ou carte. Le billet arrive par SMS, WhatsApp et e-mail avec un QR code unique.</span></div>
+        <div><b>Contrôle aux portes</b><span>Application de scan pour vos équipes : chaque QR code n'entre qu'une fois, même sans connexion stable.</span></div>
+        <div><b>Infos pratiques</b><span>Accès au stade, heure d'ouverture des portes, objets interdits, FAQ, contact. Moins d'appels au standard.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <div class="eyebrow">Technique</div>
+      <h2>Comment ce sera construit</h2>
+    </div>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Site</th><th>Solution</th><th>Pourquoi</th></tr></thead>
+        <tbody>
+          <tr><td>yacoubog.com</td><td>WordPress avec un thème sur mesure léger, sans Slider Revolution</td><td>Votre équipe garde la main sur les contenus. Le site devient plus rapide et plus simple à maintenir. Les contenus actuels sont repris.</td></tr>
+          <tr><td>civilisationmalienne.com</td><td>Même base WordPress et même thème</td><td>Une seule administration pour l'artiste et l'équipe, une seule charte, un coût de maintenance réduit.</td></tr>
+          <tr><td>enroutedu26mars.com</td><td>Site rapide en Next.js, paiement via un agrégateur mobile money, application de scan des billets</td><td>Le site doit absorber un pic de visites à l'ouverture des ventes. La billetterie s'appuie sur mon expérience des systèmes de tickets déployés pour la Mairie du District de Bamako.</td></tr>
+          <tr><td>Hébergement</td><td>Serveur dédié + réseau de diffusion (CDN) + sauvegardes quotidiennes</td><td>HTTPS partout, surveillance 24 h sur 24, adresses e-mail professionnelles sur chaque domaine.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="targets">
+      <div><b>&lt; 1 Mo</b><span>par page d'accueil, pour les forfaits mobiles</span></div>
+      <div><b>&lt; 3 s</b><span>d'affichage sur une connexion 3G</span></div>
+      <div><b>100 %</b><span>des pages pensées d'abord pour le téléphone</span></div>
+      <div><b>2 langues</b><span>français et anglais pour le public de la diaspora</span></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <div class="eyebrow">Calendrier</div>
+      <h2>Par où commencer</h2>
+      <p class="lead">La billetterie passe en premier : plus elle ouvre tôt, plus vous vendez. Le calendrier exact sera calé sur la date du concert.</p>
+    </div>
+    <ol class="plan">
+      <li><span class="when">Semaine 1</span><div><b>Cadrage et maquettes validées</b><span>Réunion avec le management, collecte des contenus (photos HD, clips, textes), validation des maquettes sur téléphone et ordinateur.</span></div></li>
+      <li><span class="when">Semaines 2 à 4</span><div><b>enroutedu26mars.com et billetterie</b><span>Page événement, paiement mobile money, envoi des billets, application de scan. Tests de charge avant l'ouverture des ventes.</span></div></li>
+      <li><span class="when">Semaines 4 à 7</span><div><b>Nouveau yacoubog.com</b><span>Reprise des contenus existants, discographie, concerts, boutique, booking. Correction de tous les liens.</span></div></li>
+      <li><span class="when">Semaines 7 à 9</span><div><b>civilisationmalienne.com</b><span>Mise en ligne du site de l'équipe, adresses e-mail professionnelles pour chaque membre, liens croisés entre les trois sites.</span></div></li>
+      <li><span class="when">Ensuite</span><div><b>Formation et suivi</b><span>Formation de votre équipe à l'administration, maintenance, statistiques mensuelles et assistance le jour du concert.</span></div></li>
+    </ol>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <div class="eyebrow">À préciser ensemble</div>
+      <h2>Questions pour le cadrage</h2>
+    </div>
+    <ul class="questions">
+      <li>Date du concert, jauge prévue et catégories de billets.</li>
+      <li>Membres de l'équipe Civilisation Malienne à présenter, avec leurs rôles.</li>
+      <li>Accès actuels : WordPress de yacoubog.com et compte Hostinger.</li>
+      <li>Comptes marchands Orange Money et Moov Money existants.</li>
+      <li>Contenus disponibles : photos HD, clips, biographie à jour, logos.</li>
+      <li>Produits à vendre en boutique, s'il y en a.</li>
+    </ul>
+  </section>
+
+  <section style="border-top:0">
+    <div class="sign">
+      <div class="eyebrow" style="color:inherit;opacity:.7">Contact</div>
+      <h2>On en parle ?</h2>
+      <p style="max-width:56ch">Je peux présenter ces maquettes en 30 minutes, en visio ou à Bamako, et vous remettre un devis détaillé après le cadrage.</p>
+      <div class="who">
+        <span>Hamady Ibrahim Diallo</span>
+        <span>hadiallo.diallo@gmail.com · +223 71 68 61 86</span>
+        <a href="../portfolio/index.html" target="_blank" rel="noopener">Voir mon portfolio</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>Proposition préparée pour l'appel à candidature Civilisation Malienne · novembre 2026</footer>
+</div>
+
+<script>
+(function () {
+  // Pseudo QR code for the e-ticket mock (seeded, illustrative only)
+  var c = document.getElementById('qr'), x = c.getContext('2d'), n = 29, seed = 2603;
+  function rnd() { seed = (seed * 16807) % 2147483647; return seed / 2147483647; }
+  x.fillStyle = '#FFFFFF'; x.fillRect(0, 0, n, n);
+  x.fillStyle = '#111010';
+  function finder(px, py) {
+    x.fillRect(px, py, 7, 7); x.fillStyle = '#FFFFFF'; x.fillRect(px + 1, py + 1, 5, 5);
+    x.fillStyle = '#111010'; x.fillRect(px + 2, py + 2, 3, 3);
+  }
+  function inFinder(i, j) { return (i < 8 && j < 8) || (i > n - 9 && j < 8) || (i < 8 && j > n - 9); }
+  for (var i = 0; i < n; i++) for (var j = 0; j < n; j++) if (!inFinder(i, j) && rnd() > .52) x.fillRect(i, j, 1, 1);
+  finder(0, 0); finder(n - 7, 0); finder(0, n - 7);
+
+  // Demo countdown: placeholder target 100 days out, to replace with the official concert date
+  var target = new Date(Date.now() + 100 * 86400000);
+  var d = document.getElementById('cd-d'), h = document.getElementById('cd-h'), m = document.getElementById('cd-m'), s = document.getElementById('cd-s');
+  function pad(v) { return v < 10 ? '0' + v : String(v); }
+  function tick() {
+    var t = Math.max(0, Math.floor((target - new Date()) / 1000));
+    d.textContent = Math.floor(t / 86400);
+    h.textContent = pad(Math.floor(t % 86400 / 3600));
+    m.textContent = pad(Math.floor(t % 3600 / 60));
+    s.textContent = pad(t % 60);
+  }
+  tick(); setInterval(tick, 1000);
+})();
+</script>
+
+</body>
+</html>

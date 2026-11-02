@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>Accueil · civilisationmalienne.com (démo)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Barlow:wght@400;500;600;700&family=Barlow+Condensed:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../assets/demo.css">
+<style>
+.hd { background: var(--white); color: var(--black); border-bottom: 1px solid var(--line); }
+.nav a { color: var(--text-grey); }
+.nav a:hover, .nav a[aria-current="page"] { color: var(--black); }
+@media (max-width: 860px) { .nav { background: var(--white); } .nav a { border-top-color: var(--line); } }
+.cm-hero { position: relative; overflow: hidden; padding-block: 72px 80px; }
+.cm-hero::before { content: ""; position: absolute; right: -120px; top: -160px; width: 560px; height: 560px; border: 64px solid var(--red); border-radius: 50%; border-left-color: transparent; transform: rotate(-20deg); }
+.cm-hero .in { position: relative; display: grid; gap: 20px; }
+.cm-hero .h-xl span { color: var(--red); }
+.mate { display: grid; gap: 8px; }
+.mate .ph { aspect-ratio: 4 / 5; border-bottom: 6px solid var(--red); }
+.mate b { font-family: var(--cond); font-size: 22px; text-transform: uppercase; }
+.mate span { color: var(--text-grey); font-size: 15px; }
+.tile { border-radius: 14px; padding: 24px; min-height: 220px; display: grid; align-content: space-between; gap: 18px; background: var(--paper); text-decoration: none; }
+.tile.r { background: var(--red); color: var(--white); }
+.tile.k { background: var(--black); color: var(--white); }
+.tile small { font-family: var(--cond); font-weight: 700; text-transform: uppercase; letter-spacing: .14em; opacity: .75; }
+.tile b { font-family: var(--display); font-weight: 400; font-size: 34px; line-height: 1; text-transform: uppercase; }
+.tile:hover { transform: translateY(-2px); }
+@media (prefers-reduced-motion: no-preference) { .tile { transition: transform .15s; } }
+.proj { display: grid; grid-template-columns: 1fr 1.2fr; gap: 40px; padding-block: 36px; border-top: 1px solid var(--line); align-items: center; }
+.proj > * { min-width: 0; }
+@media (max-width: 860px) { .proj { grid-template-columns: 1fr; } .cm-hero::before { width: 320px; height: 320px; border-width: 40px; right: -110px; top: -90px; } }
+</style>
+</head>
+<body class="site-civilisationmalienne">
+<div class="demo-bar"><div class="in"><span>Maquette de démonstration pour civilisationmalienne.com · proposée par Hamady Diallo</span><a href="../../proposition/index.html">← Retour à la proposition</a></div></div>
+<header class="hd"><div class="in">
+  <a class="logo" href="index.html">CIVILISATION MALIENNE</a>
+  <nav class="nav" id="nav" aria-label="Menu principal"><a href="index.html" aria-current="page">Accueil</a><a href="equipe.html">L'équipe</a><a href="projets.html">Projets</a><a href="coulisses.html">Coulisses</a><a href="contact.html">Partenaires</a></nav>
+  <div class="row"><a class="btn sm hd-cta" href="contact.html">Travailler avec nous</a><button class="burger" type="button" aria-expanded="false" aria-controls="nav">Menu</button></div>
+</div></header>
+<main>
+
+<section class="cm-hero"><div class="in">
+  <div class="kicker">L'équipe de Yacou B OG · Bamako</div>
+  <h1 class="h-xl">Civilisation<br><span>Malienne</span></h1>
+  <p class="lead" style="max-width:46ch">Management, booking, communication, production : l'équipe qui porte Yacou B OG de Kati jusqu'au Stade du 26 Mars.</p>
+  <div class="row"><a class="btn" href="equipe.html">Rencontrer l'équipe</a><a class="btn line" href="contact.html">Devenir partenaire</a></div>
+</div></section>
+<section class="sec paper"><div class="in">
+  <div class="sec-head"><h2 class="h-l">L'équipe</h2><a class="btn line sm" href="equipe.html">Tous les membres</a></div>
+  <div class="grid g4"><div class="mate"><div class="ph light"><span class="cap">Photo</span></div><b>Management</b><span>Nom du membre · Stratégie, carrière, contrats</span></div><div class="mate"><div class="ph light"><span class="cap">Photo</span></div><b>Booking</b><span>Nom du membre · Concerts et tournées</span></div><div class="mate"><div class="ph light"><span class="cap">Photo</span></div><b>Communication</b><span>Nom du membre · Réseaux sociaux et presse</span></div><div class="mate"><div class="ph light"><span class="cap">Photo</span></div><b>Production</b><span>Nom du membre · Studio, clips, scène</span></div></div>
+</div></section>
+<section class="sec"><div class="in grid g4">
+  <a class="tile k" href="../yacoubog/index.html"><small>L'artiste</small><b>Yacou B OG</b></a>
+  <a class="tile r" href="../enroutedu26mars/index.html"><small>Le projet</small><b>En route du 26 Mars</b></a>
+  <a class="tile" href="coulisses.html"><small>Coulisses</small><b>Studio, tournée, vidéos</b></a>
+  <a class="tile" href="contact.html"><small>Partenaires</small><b>Sponsors et presse</b></a>
+</div></section>
+
+</main>
+<footer class="ft"><div class="in">
+  <div><span class="logo">CIVILISATION MALIENNE</span><p>L'équipe de Yacou B OG.</p><p class="note" style="margin-top:12px">Maquette : textes et visuels provisoires, à remplacer par les contenus de l'équipe.</p></div>
+  <div><b>Suivre</b>
+  <a href="https://www.youtube.com/@yacoubog" target="_blank" rel="noopener">YouTube</a>
+  <a href="https://www.instagram.com/yacou_b_og_off/" target="_blank" rel="noopener">Instagram</a>
+  <a href="https://www.facebook.com/yacoubogoff" target="_blank" rel="noopener">Facebook</a>
+  <a href="https://x.com/yacoubogoff" target="_blank" rel="noopener">X</a></div>
+  <div><b>Les autres sites</b><a href="../yacoubog/index.html">yacoubog.com</a><a href="../enroutedu26mars/index.html">enroutedu26mars.com</a></div>
+</div></footer>
+<script src="../assets/demo.js"></script>
+</body>
+</html>

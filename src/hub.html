@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>Candidature Hamady Diallo · Yacou B OG</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Barlow:wght@400;500;600;700&family=Barlow+Condensed:wght@600;700&family=JetBrains+Mono:wght@400&display=swap">
+<style>
+:root { --red: #E3141B; --black: #111010; --white: #FFFFFF; --grey: #8B8486; --soft: #BDB6B8; --line: #2A2627;
+  --display: "Anton", Impact, sans-serif; --cond: "Barlow Condensed", "Arial Narrow", sans-serif; --body: "Barlow", system-ui, sans-serif; --mono: "JetBrains Mono", ui-monospace, monospace; }
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--black); color: var(--white); font-family: var(--body); font-size: 17px; line-height: 1.6;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.wrap { max-width: 1080px; margin: 0 auto; padding-block: 48px 56px; display: grid; gap: 40px; }
+.meta { font-family: var(--mono); font-size: 12px; color: var(--grey); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 6px 18px; border-bottom: 1px solid var(--line); padding-bottom: 16px; }
+h1 { margin: 0; font-family: var(--display); font-weight: 400; text-transform: uppercase; line-height: .92; font-size: clamp(48px, 9vw, 116px); text-wrap: balance; }
+h1 span { color: var(--red); }
+.lead { margin: 0; font-size: 20px; color: var(--soft); max-width: 58ch; }
+.grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+.grid > * { min-width: 0; }
+a.card { display: grid; gap: 10px; align-content: space-between; min-height: 200px; padding: 26px; border-radius: 16px; text-decoration: none; color: inherit; border: 1px solid var(--line); background: #1A1718; }
+a.card:hover, a.card:focus-visible { border-color: var(--red); outline: none; }
+a.card.main { background: var(--red); border-color: var(--red); }
+a.card.main:hover { background: #CC0F15; }
+.k { font-family: var(--cond); font-weight: 700; text-transform: uppercase; letter-spacing: .16em; font-size: 14px; opacity: .8; }
+.card b { font-family: var(--display); font-weight: 400; font-size: clamp(30px, 4vw, 44px); text-transform: uppercase; line-height: 1; }
+.card p { margin: 0; color: var(--soft); font-size: 16px; }
+.card.main p { color: var(--white); opacity: .9; }
+.go { font-family: var(--cond); font-weight: 700; text-transform: uppercase; letter-spacing: .08em; }
+h2 { margin: 0; font-family: var(--cond); font-weight: 700; text-transform: uppercase; letter-spacing: .14em; font-size: 15px; color: var(--grey); }
+.demos { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.demos > * { min-width: 0; }
+.demos a.card { min-height: 170px; }
+.demos .card b { font-size: clamp(22px, 2.6vw, 30px); overflow-wrap: anywhere; }
+footer { font-family: var(--mono); font-size: 12px; color: var(--grey); border-top: 1px solid var(--line); padding-top: 16px; display: flex; flex-wrap: wrap; gap: 6px 18px; justify-content: space-between; }
+@media (max-width: 760px) { .grid, .demos { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="meta"><span>Appel à candidature · refonte de trois plateformes</span><span>Hamady Ibrahim Diallo · novembre 2026</span></div>
+  <div style="display:grid;gap:20px">
+    <h1>En route pour <span>le Stade du 26 Mars</span></h1>
+    <p class="lead">Bonjour. Voici ma candidature pour la refonte de yacoubog.com, civilisationmalienne.com et enroutedu26mars.com. Vous y trouverez mon portfolio, ma proposition et une démo cliquable de chacun des trois sites.</p>
+  </div>
+  <div class="grid">
+    <a class="card main" href="proposition/index.html"><span class="k">Commencer ici</span><b>La proposition</b><p>Audit des trois sites actuels, maquettes, choix techniques et calendrier.</p><span class="go">Lire →</span></a>
+    <a class="card" href="portfolio/index.html"><span class="k">Qui je suis</span><b>Mon portfolio</b><p>Projets réalisés pour la Mairie du District de Bamako, la CREE, Sensexpress et d'autres.</p><span class="go">Voir →</span></a>
+  </div>
+  <div style="display:grid;gap:16px">
+    <h2>Les démos navigables</h2>
+    <div class="demos">
+      <a class="card" href="demos/yacoubog/index.html"><span class="k">L'artiste</span><b>yacoubog.com</b><p>Musique, concerts, boutique, bio, booking.</p></a>
+      <a class="card" href="demos/civilisationmalienne/index.html"><span class="k">L'équipe</span><b>civilisation&shy;malienne.com</b><p>L'équipe, les projets, les coulisses, les partenaires.</p></a>
+      <a class="card" href="demos/enroutedu26mars/index.html"><span class="k">Le concert</span><b>enroutedu26&shy;mars.com</b><p>Billetterie complète à tester, avec contrôle des billets à l'entrée.</p></a>
+    </div>
+  </div>
+  <footer><span>hadiallo.diallo@gmail.com · +223 71 68 61 86</span><span>Démos : contenus provisoires, aucun paiement réel</span></footer>
+</div>
+</body>
+</html>
