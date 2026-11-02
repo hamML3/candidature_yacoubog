@@ -203,6 +203,9 @@ th, td { text-align: left; vertical-align: top; padding: 14px 18px; border-botto
 tr:last-child td { border-bottom: 0; }
 th { font-family: var(--cond); font-weight: 700; text-transform: uppercase; letter-spacing: .1em; font-size: 13px; color: var(--muted); background: var(--paper-2); }
 td:first-child { font-family: var(--cond); font-weight: 700; font-size: 18px; white-space: nowrap; }
+.backoffice { margin-top: 22px; border: 1px solid var(--line); border-radius: 12px; padding: 20px 22px; display: grid; gap: 10px; }
+.backoffice h3 { font-family: var(--cond); font-weight: 700; font-size: 22px; text-transform: uppercase; }
+.backoffice ul { margin: 0; padding-left: 20px; display: grid; gap: 4px; color: var(--muted); }
 .targets { margin-top: 22px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
 .targets div { border-top: 3px solid var(--red); padding-top: 10px; display: grid; gap: 2px; }
 .targets b { font-family: var(--display); font-weight: 400; font-size: 34px; line-height: 1.05; font-variant-numeric: tabular-nums; }
@@ -327,7 +330,7 @@ footer { padding-block: 26px 40px; font-family: var(--mono); font-size: 12px; co
         <div><span class="role">L'équipe</span><h3>civilisationmalienne.com</h3><p>Le site de l'équipe derrière Yacou B OG : qui fait quoi, les coulisses, les projets en cours, et le contact pour les partenaires et la presse.</p></div>
         <div><span class="role">L'événement</span><h3>enroutedu26mars.com</h3><p>Tout pour le concert au Stade du 26 Mars : compte à rebours, billetterie, infos pratiques, programme et partenaires.</p></div>
       </div>
-      <div class="shared"><b>En commun</b><span>Charte rouge et noir</span><span>Une billetterie</span><span>Une liste de fans (e-mail, WhatsApp)</span><span>Un espace d'administration</span><span>Statistiques de visite</span></div>
+      <div class="shared"><b>En commun</b><span>Charte rouge et noir</span><span>Une billetterie</span><span>Une liste de fans (e-mail, WhatsApp)</span><span>Un seul back-office</span><span>Statistiques de visite</span></div>
     </div>
   </section>
 
@@ -481,12 +484,22 @@ footer { padding-block: 26px 40px; font-family: var(--mono); font-size: 12px; co
       <table>
         <thead><tr><th>Site</th><th>Solution</th><th>Pourquoi</th></tr></thead>
         <tbody>
-          <tr><td>yacoubog.com</td><td>WordPress avec un thème sur mesure léger, sans Slider Revolution</td><td>Votre équipe garde la main sur les contenus. Le site devient plus rapide et plus simple à maintenir. Les contenus actuels sont repris.</td></tr>
-          <tr><td>civilisationmalienne.com</td><td>Même base WordPress et même thème</td><td>Une seule administration pour l'artiste et l'équipe, une seule charte, un coût de maintenance réduit.</td></tr>
-          <tr><td>enroutedu26mars.com</td><td>Site rapide en Next.js, paiement via un agrégateur mobile money, application de scan des billets</td><td>Le site doit absorber un pic de visites à l'ouverture des ventes. La billetterie s'appuie sur mon expérience des systèmes de tickets déployés pour la Mairie du District de Bamako.</td></tr>
-          <tr><td>Hébergement</td><td>Serveur dédié + réseau de diffusion (CDN) + sauvegardes quotidiennes</td><td>HTTPS partout, surveillance 24 h sur 24, adresses e-mail professionnelles sur chaque domaine.</td></tr>
+          <tr><td>Les trois sites</td><td>Une seule application Next.js pour les trois domaines, avec un back-office unique en français (Payload CMS)</td><td>Une seule administration, une seule charte, une seule liste de fans. L'équipe publie depuis son téléphone, sans développeur.</td></tr>
+          <tr><td>yacoubog.com</td><td>Reprise des contenus du WordPress actuel : textes, photos, discographie, dates</td><td>Rien n'est perdu à la migration. Le Slider Revolution et les extensions lourdes disparaissent, le site devient plus rapide.</td></tr>
+          <tr><td>enroutedu26mars.com</td><td>Pages servies par un CDN, billetterie sur mesure avec paiement via un agrégateur mobile money, application de scan des billets</td><td>Le site absorbe le pic de visites à l'ouverture des ventes. La billetterie s'appuie sur mon expérience des systèmes de tickets déployés pour la Mairie du District de Bamako.</td></tr>
+          <tr><td>Hébergement</td><td>Serveur dédié, base PostgreSQL, CDN, sauvegardes quotidiennes</td><td>HTTPS partout, surveillance 24 h sur 24, adresses e-mail professionnelles sur chaque domaine.</td></tr>
+          <tr><td>Vos garanties</td><td>Code source remis, documentation, formation de l'équipe</td><td>Vous restez propriétaire de vos sites et pouvez les confier à un autre prestataire si besoin.</td></tr>
         </tbody>
       </table>
+    </div>
+    <div class="backoffice">
+      <h3>Un seul back-office pour les trois sites</h3>
+      <ul>
+        <li>Ajouter une sortie, un clip, une date de concert ou une actualité depuis un téléphone.</li>
+        <li>Présenter les membres de l'équipe et publier les coulisses.</li>
+        <li>Suivre les ventes de billets en temps réel et exporter la liste des acheteurs.</li>
+        <li>Envoyer une annonce à la liste de fans et consulter les statistiques de visite.</li>
+      </ul>
     </div>
     <div class="targets">
       <div><b>&lt; 1 Mo</b><span>par page d'accueil, pour les forfaits mobiles</span></div>
@@ -504,10 +517,10 @@ footer { padding-block: 26px 40px; font-family: var(--mono); font-size: 12px; co
     </div>
     <ol class="plan">
       <li><span class="when">Semaine 1</span><div><b>Cadrage et maquettes validées</b><span>Réunion avec le management, collecte des contenus (photos HD, clips, textes), validation des maquettes sur téléphone et ordinateur.</span></div></li>
-      <li><span class="when">Semaines 2 à 4</span><div><b>enroutedu26mars.com et billetterie</b><span>Page événement, paiement mobile money, envoi des billets, application de scan. Tests de charge avant l'ouverture des ventes.</span></div></li>
-      <li><span class="when">Semaines 4 à 7</span><div><b>Nouveau yacoubog.com</b><span>Reprise des contenus existants, discographie, concerts, boutique, booking. Correction de tous les liens.</span></div></li>
+      <li><span class="when">Semaines 2 à 4</span><div><b>Socle commun, puis enroutedu26mars.com et billetterie</b><span>Back-office et charte partagés par les trois sites. Page événement, paiement mobile money, envoi des billets, application de scan. Tests de charge avant l'ouverture des ventes.</span></div></li>
+      <li><span class="when">Semaines 4 à 7</span><div><b>Nouveau yacoubog.com</b><span>Migration des contenus du WordPress actuel, discographie, concerts, boutique, booking. Correction de tous les liens.</span></div></li>
       <li><span class="when">Semaines 7 à 9</span><div><b>civilisationmalienne.com</b><span>Mise en ligne du site de l'équipe, adresses e-mail professionnelles pour chaque membre, liens croisés entre les trois sites.</span></div></li>
-      <li><span class="when">Ensuite</span><div><b>Formation et suivi</b><span>Formation de votre équipe à l'administration, maintenance, statistiques mensuelles et assistance le jour du concert.</span></div></li>
+      <li><span class="when">Ensuite</span><div><b>Formation et suivi</b><span>Formation de votre équipe au back-office, documentation, remise du code source, maintenance, statistiques mensuelles et assistance le jour du concert.</span></div></li>
     </ol>
   </section>
 
